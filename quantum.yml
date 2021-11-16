@@ -15,9 +15,9 @@ networks:
   public:
     external: true
     name: public
-  sva-redis-server:
+  bbnavi-redis-server:
     external: true
-    name: sva-redis-server
+    name: bbnavi-redis-server
 services:
   app:
     configs:
@@ -34,7 +34,7 @@ services:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
       default: {}
-      sva-redis-server: {}
+      bbnavi-redis-server: {}
     volumes:
     - assets:/assets:rw
     - /etc/localtime:/etc/localtime:ro
@@ -62,7 +62,7 @@ services:
     networks:
       default: {}
       public: {}
-      sva-redis-server: {}
+      bbnavi-redis-server: {}
     volumes:
     - assets:/assets:rw
     - /etc/localtime:/etc/localtime:ro
@@ -104,7 +104,7 @@ services:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
       default: {}
-      sva-redis-server: {}
+      bbnavi-redis-server: {}
     volumes:
     - assets:/assets:rw
     - /etc/localtime:/etc/localtime:ro
@@ -136,4 +136,3 @@ volumes:
   assets: {}
   db: {}
   unicorn: {}
-
