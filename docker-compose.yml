@@ -3,18 +3,18 @@ version: '3.7'
 services:
   delayed_job:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
-    command: bin/delayed_job start
+    command: bin/delayed_job run
     environment:
+      SVA_COMMUNITY: bbnavi
       RAILS_ENV: production
       RAILS_LOG_TO_STDOUT: 1
     configs:
-      - source: smart-village-app-mainserver-database-yml
-        target: /app/config/database.yml
-      - source: smart-village-app-mainserver-unicorn-rb
-        target: /app/config/unicorn.rb
+      - source: mainserver-common-master-key
+        target: /app/config/master.key
     volumes:
       - unicorn:/unicorn
       - assets:/assets
+    depends_on: [db]
     deploy:
       restart_policy:
         condition: on-failure
@@ -23,16 +23,16 @@ services:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     command: bin/start-cron.sh
     environment:
+      SVA_COMMUNITY: bbnavi
       RAILS_ENV: production
       RAILS_LOG_TO_STDOUT: 1
     configs:
-      - source: smart-village-app-mainserver-database-yml
-        target: /app/config/database.yml
-      - source: smart-village-app-mainserver-unicorn-rb
-        target: /app/config/unicorn.rb
+      - source: mainserver-common-master-key
+        target: /app/config/master.key
     volumes:
       - unicorn:/unicorn
       - assets:/assets
+    depends_on: [db]
     deploy:
       restart_policy:
         condition: on-failure
@@ -40,13 +40,12 @@ services:
   app:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     environment:
+      SVA_COMMUNITY: bbnavi
       RAILS_ENV: production
       RAILS_LOG_TO_STDOUT: 1
     configs:
-      - source: smart-village-app-mainserver-database-yml
-        target: /app/config/database.yml
-      - source: smart-village-app-mainserver-unicorn-rb
-        target: /app/config/unicorn.rb
+      - source: mainserver-common-master-key
+        target: /app/config/master.key
     volumes:
       - unicorn:/unicorn
       - assets:/assets
@@ -56,6 +55,7 @@ services:
 
   nginx:
     image: nginx
+    depends_on: [app]
     networks: [default, public]
     configs:
       - source: smart-village-app-mainserver-nginx-conf
@@ -64,7 +64,7 @@ services:
       - unicorn:/unicorn
       - assets:/public
     labels:
-      - traefik.frontend.rule=Host:datahub.bbnavi.de
+      - traefik.frontend.rule=Host:smartvillage.app
     deploy:
       restart_policy:
         condition: on-failure
@@ -91,11 +91,9 @@ volumes:
   assets:
 
 configs:
+  mainserver-common-master-key:
+    external: true
   smart-village-app-mainserver-nginx-conf:
-    external: true
-  smart-village-app-mainserver-database-yml:
-    external: true
-  smart-village-app-mainserver-unicorn-rb:
     external: true
 
 networks:
