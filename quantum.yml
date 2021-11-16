@@ -12,12 +12,12 @@ networks:
   adminer:
     external: true
     name: adminer
-  public:
-    external: true
-    name: public
   bbnavi-redis-server:
     external: true
     name: bbnavi-redis-server
+  public:
+    external: true
+    name: public
 services:
   app:
     configs:
@@ -33,11 +33,10 @@ services:
       RAILS_LOG_TO_STDOUT: 1
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
-      default: {}
       bbnavi-redis-server: {}
+      default: {}
     volumes:
     - assets:/assets:rw
-    - /etc/localtime:/etc/localtime:ro
     - unicorn:/unicorn:rw
   cron_job:
     command: bin/start-cron.sh
@@ -60,12 +59,11 @@ services:
       RAILS_LOG_TO_STDOUT: 1
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
+      bbnavi-redis-server: {}
       default: {}
       public: {}
-      bbnavi-redis-server: {}
     volumes:
     - assets:/assets:rw
-    - /etc/localtime:/etc/localtime:ro
     - unicorn:/unicorn:rw
   db:
     command:
@@ -86,7 +84,6 @@ services:
         - int-development-mainserver
       default: {}
     volumes:
-    - /etc/localtime:/etc/localtime:ro
     - db:/var/lib/mysql:rw
   delayed_job:
     command: bin/delayed_job start
@@ -103,11 +100,10 @@ services:
       RAILS_LOG_TO_STDOUT: 1
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
-      default: {}
       bbnavi-redis-server: {}
+      default: {}
     volumes:
     - assets:/assets:rw
-    - /etc/localtime:/etc/localtime:ro
     - unicorn:/unicorn:rw
   nginx:
     configs:
@@ -128,7 +124,6 @@ services:
       default: {}
       public: {}
     volumes:
-    - /etc/localtime:/etc/localtime:ro
     - assets:/public:rw
     - unicorn:/unicorn:rw
 version: '3.7'
@@ -136,3 +131,4 @@ volumes:
   assets: {}
   db: {}
   unicorn: {}
+
