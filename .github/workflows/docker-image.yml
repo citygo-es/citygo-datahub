@@ -31,4 +31,4 @@ jobs:
         with: 
           context: .
           push: true
-          tags: registry.gitlab.tpwd.de/bbnavi-datahub:latest
+          tags: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
