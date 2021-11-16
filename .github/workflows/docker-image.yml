@@ -36,7 +36,8 @@ jobs:
       QUANTUM_ENDPOINT: "tpwd-bb-navi"
       QUANTUM_STACK: "bbnavi-datahub"
     steps:
-      - name: Build docker-compose qunatum.yml
-        run: docker-compose -f docker-compose.yml -f stack.yml config > quantum.yml
       - uses: actions/checkout@v2
-      - run: quantum-cli stacks update --create --wait
+      - name: Build docker-compose qunatum.yml  
+        run: docker-compose -f docker-compose.yml -f stack.yml config > quantum.yml
+      - name: Deploy to Planetary Quantum
+        run: quantum-cli stacks update --create --wait
