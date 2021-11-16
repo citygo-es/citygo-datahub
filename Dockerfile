@@ -1,10 +1,10 @@
-FROM ruby:2.6.8
+FROM ruby:2.6.3-stretch
 
 RUN apt-get update \
   && apt-get install -y curl apt-transport-https ca-certificates \
   && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
-  && curl -sL https://deb.nodesource.com/setup_12.x | bash \
+  && curl -sL https://deb.nodesource.com/setup_10.x | bash \
   && apt-get install -y nodejs \
   && apt-get install -y yarn \
   && apt-get install -y wget \
@@ -28,6 +28,9 @@ RUN bundle install
 
 COPY . /app
 RUN chmod +x bin/start-cron.sh
+COPY docker/unicorn.rb /app/config/unicorn.rb
+COPY docker/database.yml /app/config/database.yml
+
 # TODO: wie kann assets building ohne DB passieren?
 # RUN bundle exec rake assets:precompile
 
