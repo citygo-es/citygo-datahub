@@ -117,13 +117,13 @@ services:
       labels:
         traefik.docker.network: public
         traefik.enable: "true"
-        traefik.frontend.rule: Host:datahub.bb-navi.de
+        traefik.frontend.rule: Host:datahub.bbnavi.de
         traefik.port: '80'
       restart_policy:
         condition: on-failure
     image: nginx
     labels:
-      traefik.frontend.rule: Host:smartvillage.app
+      traefik.frontend.rule: Host:datahub.bbnavi.de
     networks:
       default: {}
       public: {}

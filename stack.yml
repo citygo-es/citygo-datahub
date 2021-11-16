@@ -44,7 +44,7 @@ services:
         traefik.enable: "true"
         traefik.port: 80
         traefik.docker.network: public
-        traefik.frontend.rule: Host:datahub.bb-navi.de
+        traefik.frontend.rule: Host:datahub.bbnavi.de
 
   db:
     networks:
