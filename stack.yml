@@ -5,7 +5,6 @@ services:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
       - default
-      - logs
       - sva-redis-server
     environment:
       RAILS_ENV: production
@@ -34,7 +33,6 @@ services:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
       - default
-      - logs
       - sva-redis-server
     environment:
       RAILS_ENV: production
@@ -57,8 +55,6 @@ services:
 
 networks:
   adminer:
-    external: true
-  logs:
     external: true
   public:
     external: true

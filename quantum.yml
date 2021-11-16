@@ -12,9 +12,6 @@ networks:
   adminer:
     external: true
     name: adminer
-  logs:
-    external: true
-    name: logs
   public:
     external: true
     name: public
@@ -37,7 +34,6 @@ services:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
       default: {}
-      logs: {}
       sva-redis-server: {}
     volumes:
     - assets:/assets:rw
@@ -108,7 +104,6 @@ services:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
       default: {}
-      logs: {}
       sva-redis-server: {}
     volumes:
     - assets:/assets:rw
