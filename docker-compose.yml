@@ -14,7 +14,6 @@ services:
     volumes:
       - unicorn:/unicorn
       - assets:/assets
-    depends_on: [db]
     deploy:
       restart_policy:
         condition: on-failure
@@ -32,7 +31,6 @@ services:
     volumes:
       - unicorn:/unicorn
       - assets:/assets
-    depends_on: [db]
     deploy:
       restart_policy:
         condition: on-failure
@@ -55,7 +53,6 @@ services:
 
   nginx:
     image: nginx
-    depends_on: [app]
     networks: [default, public]
     configs:
       - source: smart-village-app-mainserver-nginx-conf

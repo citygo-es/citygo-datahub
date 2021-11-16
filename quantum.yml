@@ -39,9 +39,6 @@ services:
     configs:
     - source: mainserver-common-master-key
       target: /app/config/master.key
-    depends_on:
-      db:
-        condition: service_started
     deploy:
       labels:
         swarm.cronjob.enable: "true"
@@ -88,9 +85,6 @@ services:
     configs:
     - source: mainserver-common-master-key
       target: /app/config/master.key
-    depends_on:
-      db:
-        condition: service_started
     deploy:
       restart_policy:
         condition: on-failure
@@ -109,9 +103,6 @@ services:
     configs:
     - source: smart-village-app-mainserver-nginx-conf
       target: /etc/nginx/conf.d/default.conf
-    depends_on:
-      app:
-        condition: service_started
     deploy:
       labels:
         traefik.docker.network: public
