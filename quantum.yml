@@ -1,4 +1,7 @@
 configs:
+  bbnavi-datahub-credentials:
+    external: true
+    name: bbnavi-datahub-credentials
   mainserver-common-master-key:
     external: true
     name: mainserver-common-master-key
@@ -18,6 +21,8 @@ networks:
 services:
   app:
     configs:
+    - source: bbnavi-datahub-credentials
+      target: /app/releases/bbnavi/credentials.yml
     - source: mainserver-common-master-key
       target: /app/config/master.key
     deploy:
@@ -37,6 +42,8 @@ services:
   cron_job:
     command: bin/start-cron.sh
     configs:
+    - source: bbnavi-datahub-credentials
+      target: /app/releases/bbnavi/credentials.yml
     - source: mainserver-common-master-key
       target: /app/config/master.key
     deploy:
@@ -83,6 +90,8 @@ services:
   delayed_job:
     command: bin/delayed_job run
     configs:
+    - source: bbnavi-datahub-credentials
+      target: /app/releases/bbnavi/credentials.yml
     - source: mainserver-common-master-key
       target: /app/config/master.key
     deploy:
