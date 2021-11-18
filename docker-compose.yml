@@ -11,6 +11,8 @@ services:
     configs:
       - source: mainserver-common-master-key
         target: /app/config/master.key
+      - source:  bbnavi-datahub-credentials
+        target: /app/releases/bbnavi/credentials.yml
     volumes:
       - unicorn:/unicorn
       - assets:/assets
@@ -28,6 +30,8 @@ services:
     configs:
       - source: mainserver-common-master-key
         target: /app/config/master.key
+      - source:  bbnavi-datahub-credentials
+        target: /app/releases/bbnavi/credentials.yml
     volumes:
       - unicorn:/unicorn
       - assets:/assets
@@ -44,6 +48,8 @@ services:
     configs:
       - source: mainserver-common-master-key
         target: /app/config/master.key
+      - source:  bbnavi-datahub-credentials
+        target: /app/releases/bbnavi/credentials.yml
     volumes:
       - unicorn:/unicorn
       - assets:/assets
@@ -88,6 +94,8 @@ volumes:
   assets:
 
 configs:
+  bbnavi-datahub-credentials:
+    external: true
   mainserver-common-master-key:
     external: true
   smart-village-app-mainserver-nginx-conf:

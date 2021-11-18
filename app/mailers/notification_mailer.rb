@@ -7,7 +7,7 @@ class NotificationMailer < ApplicationMailer
     @notify_admin_content = notify_admin_content
 
     mail(
-      to: Rails.application.credentials.mailer[:notify_admin][:to],
+      to: Settings.mailer[:notify_admin][:to],
       subject: t("mailers.notification.notify_admin.subject")
     )
   end
@@ -19,7 +19,7 @@ class NotificationMailer < ApplicationMailer
 
     @survey = survey
     @comment = comment
-    @cms_url = Rails.application.credentials.cms[:url]
+    @cms_url = Settings.cms[:url]
 
     mail(
       to: creator_of_survey.email,

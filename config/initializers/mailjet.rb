@@ -1,8 +1,8 @@
 # frozen_string_literal: true
-if Rails.application.credentials.mailjet.present?
+if Settings.mailjet.present?
   Mailjet.configure do |config|
-    config.api_key = Rails.application.credentials.mailjet[:api_key]
-    config.secret_key = Rails.application.credentials.mailjet[:secret_key]
-    config.default_from = Rails.application.credentials.mailjet[:default_from]
+    config.api_key = Settings.mailjet[:api_key]
+    config.secret_key = Settings.mailjet[:secret_key]
+    config.default_from = Settings.mailjet[:default_from]
   end
 end
