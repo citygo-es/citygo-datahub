@@ -1,0 +1,24 @@
+# Portainer Stack Config for Redis Server
+
+networks:
+  public:
+    external: true
+    name: public
+  bbnavi-redis-server:
+    external: true
+    name: bbnavi-redis-server
+services:
+  redis:
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+      REDIS_DISABLE_COMMANDS: FLUSHDB,FLUSHALL
+    image: docker.io/bitnami/redis:6.0-debian-10
+    networks:
+      bbnavi-redis-server:
+        aliases:
+        - bbnavi-redis-server
+    volumes:
+    - redis_data:/bitnami/redis/data:rw
+version: '3.7'
+volumes:
+  redis_data: {}
