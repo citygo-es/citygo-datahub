@@ -2,6 +2,7 @@
 
 require_relative "boot"
 
+require "./lib/settings.rb"
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
