@@ -1,6 +1,18 @@
 version: '3.7'
 
 services:
+  redis:
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+      REDIS_DISABLE_COMMANDS: FLUSHDB,FLUSHALL
+    image: docker.io/bitnami/redis:6.0-debian-10
+    networks:
+      bbnavi-redis-server:
+        aliases:
+        - bbnavi-redis-server
+    volumes:
+     - redis_data:/bitnami/redis/data:rw
+
   delayed_job:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     command: bin/delayed_job run
@@ -90,6 +102,9 @@ services:
 
 volumes:
   db:
+    external: true
+  redis_data:
+    external: true
   unicorn:
   assets:
 

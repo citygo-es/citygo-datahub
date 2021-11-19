@@ -129,9 +129,25 @@ services:
     volumes:
     - assets:/public:rw
     - unicorn:/unicorn:rw
+  redis:
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+      REDIS_DISABLE_COMMANDS: FLUSHDB,FLUSHALL
+    image: docker.io/bitnami/redis:6.0-debian-10
+    networks:
+      bbnavi-redis-server:
+        aliases:
+        - bbnavi-redis-server
+    volumes:
+    - redis_data:/bitnami/redis/data:rw
 version: '3.7'
 volumes:
   assets: {}
-  db: {}
+  db:
+    external: true
+    name: db
+  redis_data:
+    external: true
+    name: redis_data
   unicorn: {}
 
