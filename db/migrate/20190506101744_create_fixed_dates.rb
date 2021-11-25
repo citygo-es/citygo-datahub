@@ -8,7 +8,7 @@ class CreateFixedDates < ActiveRecord::Migration[5.2]
       t.time :time_end
       t.string :time_description
       t.boolean :use_only_time_description
-      t.references :dateable, polymorphic: true, index: true
+      t.references :dateable, polymorphic: true, index: { name: :index_fixed_dates_dateable }
 
       t.timestamps
     end
