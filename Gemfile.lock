@@ -248,7 +248,6 @@ GEM
     multipart-post (2.1.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
-    mysql2 (0.5.2)
     nenv (0.3.0)
     netrc (0.11.0)
     nio4r (2.3.1)
@@ -267,6 +266,7 @@ GEM
     pastel (0.7.2)
       equatable (~> 0.5.0)
       tty-color (~> 0.4.0)
+    pg (1.2.3)
     powerpack (0.1.2)
     promise.rb (0.7.4)
     pry (0.12.2)
@@ -486,8 +486,8 @@ DEPENDENCIES
   lograge
   mailjet
   mimemagic (>= 0.3.6)
-  mysql2 (>= 0.4.4, < 0.6.0)
   order_as_specified
+  pg (>= 0.18, < 2.0)
   puma (~> 3.12)
   rails (~> 5.2.4)
   rails-controller-testing

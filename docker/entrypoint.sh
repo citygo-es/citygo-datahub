@@ -2,7 +2,7 @@
 
 set -e
 
-DB=${DB_HOST:-db:3306}
+DB=${DB_HOST:-bbnavi-datahub-postgresql:5432}
 
 dockerize -wait tcp://$DB -timeout 30s
 

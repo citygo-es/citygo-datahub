@@ -12,6 +12,9 @@ networks:
   adminer:
     external: true
     name: adminer
+  bbnavi-datahub-postgresql:
+    external: true
+    name: bbnavi-datahub-postgresql
   bbnavi-redis-server:
     external: true
     name: bbnavi-redis-server
@@ -34,6 +37,7 @@ services:
       SVA_COMMUNITY: bbnavi
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
+      bbnavi-datahub-postgresql: {}
       bbnavi-redis-server: {}
       default: {}
     volumes:
@@ -61,6 +65,7 @@ services:
       SVA_COMMUNITY: bbnavi
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
+      bbnavi-datahub-postgresql: {}
       bbnavi-redis-server: {}
       default: {}
       public: {}
@@ -68,25 +73,24 @@ services:
     - assets:/assets:rw
     - unicorn:/unicorn:rw
   db:
-    command:
-    - --character-set-server=utf8mb4
-    - --collation-server=utf8mb4_unicode_ci
     deploy:
       restart_policy:
         condition: on-failure
     environment:
-      MYSQL_DATABASE: smart
-      MYSQL_PASSWORD: smart
-      MYSQL_ROOT_PASSWORD: smart
-      MYSQL_USER: smart
-    image: mysql:5.7.21
+      POSTGRES_DB: bbnavihub
+      POSTGRES_PASSWORT: bbnavihub
+      POSTGRES_USER: bbnavihub
+    image: postgres:10.3-alpine
     networks:
       adminer:
         aliases:
         - int-development-mainserver
+      bbnavi-datahub-postgresql:
+        aliases:
+        - bbnavi-datahub-postgresql
       default: {}
     volumes:
-    - db:/var/lib/mysql:rw
+    - datahub_db:/var/lib/postgresql/data:rw
   delayed_job:
     command: bin/delayed_job run
     configs:
@@ -103,6 +107,7 @@ services:
       SVA_COMMUNITY: bbnavi
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
+      bbnavi-datahub-postgresql: {}
       bbnavi-redis-server: {}
       default: {}
     volumes:
@@ -143,9 +148,9 @@ services:
 version: '3.7'
 volumes:
   assets: {}
-  db:
+  datahub_db:
     external: true
-    name: db
+    name: datahub_db
   redis_data:
     external: true
     name: redis_data
