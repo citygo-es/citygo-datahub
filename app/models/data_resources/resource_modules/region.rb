@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 #
-# Table for all regions which are relevant for the smart village app.
+# Table for all regions which are relevant.
 #
 class Region < ApplicationRecord
   has_one :event_record

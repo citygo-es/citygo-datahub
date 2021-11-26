@@ -18,11 +18,11 @@
     }
   },
   {
-    "title": "Smart Village App",
+    "title": "BBNavi App",
     "routeName": "Html",
     "icon": "https://server.bad-belzig.smart-village.app/mobile-app/assets/home-service/BUS.png",
     "params": {
-      "title": "Smart Village App",
+      "title": "BBNavi App",
       "query": "publicHtmlFile",
       "queryVariables": {
         "name": "smart-village-app"

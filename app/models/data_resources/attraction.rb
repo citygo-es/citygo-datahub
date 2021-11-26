@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 #
-# Attraction is the superclass for all (touristic) attractions in the smart village.
+# Attraction is the superclass for all (touristic) attractions.
 #
 class Attraction < ApplicationRecord
   attr_accessor :category_name

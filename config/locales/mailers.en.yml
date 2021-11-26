@@ -2,6 +2,6 @@ en:
   mailers:
     notification:
       notify_admin:
-        subject: "[Smart Village App] Form created"
+        subject: "[BBNavi] Form created"
       survey_commented:
-        subject: "[Smart Village App] Survey commented"
+        subject: "[BBNavi] Survey commented"

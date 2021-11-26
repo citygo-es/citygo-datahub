@@ -2,7 +2,7 @@
 
 #
 # A Tour is a planned route to walk ride or canoe and which passes through
-# the surrounding areas of the Smart Village
+# the surrounding areas
 #
 class Tour < Attraction
   include FilterByRole
