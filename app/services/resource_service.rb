@@ -77,7 +77,7 @@ class ResourceService
 
     ExternalReference.find_by(
       data_provider: data_provider,
-      external_type: resource_class,
+      external_type: resource_class.to_s,
       unique_id: resource.unique_id
     )
   end
