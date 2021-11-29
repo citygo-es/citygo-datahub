@@ -5,6 +5,10 @@ class GeoLocation < ApplicationRecord
 
   validates_presence_of :latitude, :longitude
   validates :latitude, :longitude, numericality: true
+
+  def coordinates
+    [longitude, latitude]
+  end
 end
 
 # == Schema Information

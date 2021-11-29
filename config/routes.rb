@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :export do
+    get "point_of_interests", to: "point_of_interests#index", defaults: { format: "geojson" }
+  end
+
   namespace :notification do
     resources :wastes
     resources :devices do
