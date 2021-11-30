@@ -27,6 +27,15 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :svg_icon, "SVG Image as text" %>
+    <%= form.text_area :svg_icon, class: "form-control" %>
+    <small class="form-text text-muted">
+      Will be used as an icon in maps
+    </small>
+  </div>
+
+
+  <div class="form-group">
     <%= form.submit t("doorkeeper.applications.buttons.submit"), class: "btn btn-primary" %>
     <%= link_to t("doorkeeper.applications.buttons.cancel"), categories_path, class: "btn btn-default" %>
   </div>
