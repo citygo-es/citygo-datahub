@@ -47,7 +47,7 @@ class PointOfInterest < Attraction
       type: "Feature",
       properties: {
         name: name,
-        description: description,
+        popupContent: geojson_description,
         category: current_category.try(:name),
         icon: {
           id: "tmbIcon",
@@ -59,6 +59,10 @@ class PointOfInterest < Attraction
         coordinates: location.try(:geo_location).try(:coordinates)
       }
     }
+  end
+
+  def geojson_description
+    [description, opening_hours.map(&:description) ].flatten.compact.join("\n\n")
   end
 
   def geojson_icon(current_category)
