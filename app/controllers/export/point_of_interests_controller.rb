@@ -3,6 +3,12 @@ class Export::PointOfInterestsController < ApplicationController
   # action_cache
 
   def index
-    @entries = PointOfInterest.joins(location: :geo_location).visible
+    @category = Category.find_by(id: params[:category_id]) if params[:category_id].present?
+
+    if @category.present?
+      @entries = @category.points_of_interest.visible.joins(location: :geo_location)
+    else
+      @entries = PointOfInterest.joins(location: :geo_location).visible
+    end
   end
 end
