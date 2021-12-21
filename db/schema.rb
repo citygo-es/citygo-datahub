@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_30_074408) do
+ActiveRecord::Schema.define(version: 2021_12_21_110102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "accessibility_informations", force: :cascade do |t|
     t.text "description"
@@ -242,6 +243,7 @@ ActiveRecord::Schema.define(version: 2021_11_30_074408) do
     t.bigint "geo_locateable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.geography "coords", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.index ["geo_locateable_type", "geo_locateable_id"], name: "index_geo_locations_geo_locateable"
   end
 

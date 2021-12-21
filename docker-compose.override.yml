@@ -1,6 +1,15 @@
 version: '3.7'
 
 services:
+  tile_server:
+    build:
+      context: .
+      dockerfile: Dockerfile.martin
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=public
+      - traefik.port=5000
+      - traefik.frontend.rule=Host:tile-server.smart-village.docker.localhost
   app:
     build:
       context: .

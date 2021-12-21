@@ -1,13 +1,21 @@
 # frozen_string_literal: true
 
 class GeoLocation < ApplicationRecord
-  belongs_to :geo_locateable, polymorphic: true
+  belongs_to :geo_locateable, polymorphic: true, optional: true
 
   validates_presence_of :latitude, :longitude
   validates :latitude, :longitude, numericality: true
 
+  before_save :store_postgis_coordinates
+
   def coordinates
     [longitude, latitude]
+  end
+
+  def store_postgis_coordinates
+    return unless latitude && longitude
+
+    self.coords = RGeo::Cartesian.factory(srid: 4326).point(longitude, latitude)
   end
 end
 
