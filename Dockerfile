@@ -8,6 +8,7 @@ RUN apt-get update \
   && apt-get install -y nodejs \
   && apt-get install -y yarn \
   && apt-get install -y wget \
+  && apt-get install -y libpq-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /usr/src/*
 
@@ -31,8 +32,7 @@ RUN chmod +x bin/start-cron.sh
 COPY docker/unicorn.rb /app/config/unicorn.rb
 COPY docker/database.yml /app/config/database.yml
 
-# TODO: wie kann assets building ohne DB passieren?
-# RUN bundle exec rake assets:precompile
+RUN bundle exec rake DATABASE_URL=nulldb://user:pass@127.0.0.1/dbname assets:precompile
 
 ENTRYPOINT ["/app/docker/entrypoint.sh"]
 

@@ -55,6 +55,11 @@ GEM
       activemodel (= 5.2.4.3)
       activesupport (= 5.2.4.3)
       arel (>= 9.0)
+    activerecord-nulldb-adapter (0.8.0)
+      activerecord (>= 5.2.0, < 7.1)
+    activerecord-postgis-adapter (5.2.3)
+      activerecord (~> 5.1)
+      rgeo-activerecord (~> 6.0)
     activestorage (5.2.4.3)
       actionpack (= 5.2.4.3)
       activerecord (= 5.2.4.3)
@@ -326,6 +331,10 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rgeo (2.3.1)
+    rgeo-activerecord (6.2.2)
+      activerecord (>= 5.0)
+      rgeo (>= 1.0.0)
     rollbar (2.21.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
@@ -448,6 +457,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-nulldb-adapter
+  activerecord-postgis-adapter
   acts-as-taggable-on
   addressable
   ancestry (~> 2.1)
@@ -493,6 +504,7 @@ DEPENDENCIES
   rails-controller-testing
   rb-readline
   redis
+  rgeo
   rollbar
   rspec-rails
   ruby-debug-ide

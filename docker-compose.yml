@@ -1,6 +1,20 @@
 version: '3.7'
 
 services:
+  tile_server:
+    image: urbica/martin
+    environment:
+      DATABASE_URL: postgres://bbnavihub@bbnavi-datahub-postgresql/bbnavihub
+    command: "martin --config /martin_config.yml"
+    ports:
+      - 5000:5000
+    configs:
+      - source: martin-config-yml
+        target: /martin_config.yml
+    networks:
+      - bbnavi-datahub-postgresql
+      - public
+
   redis:
     environment:
       ALLOW_EMPTY_PASSWORD: "yes"
@@ -94,11 +108,13 @@ services:
         condition: on-failure
 
   db:
-    image: 'postgres:10.3-alpine'
+    # image: 'postgres:10.3-alpine'
+    image: 'postgis/postgis:10-3.1'
     environment:
       POSTGRES_USER: bbnavihub
       POSTGRES_PASSWORT: bbnavihub
       POSTGRES_DB: bbnavihub
+      DATADIR: /var/lib/postgresql/data
     networks:
       bbnavi-datahub-postgresql:
         aliases:
@@ -123,6 +139,8 @@ configs:
   mainserver-common-master-key:
     external: true
   datahub-nginx-conf:
+    external: true
+  martin-config-yml:
     external: true
 
 networks:

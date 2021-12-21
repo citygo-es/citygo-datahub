@@ -1,0 +1,102 @@
+---
+# The socket address to bind [default: 0.0.0.0:3000]
+listen_addresses: '0.0.0.0:5000'
+
+# Database connection string
+connection_string: 'postgres://bbnavihub@bbnavi-datahub-postgresql/bbnavihub'
+
+# Maximum connections pool size [default: 20]
+pool_size: 20
+
+# Connection keep alive timeout [default: 75]
+keep_alive: 75
+
+# Number of web server workers
+worker_processes: 8
+
+# Enable watch mode
+watch: false
+
+# Trust invalid certificates. This introduces significant vulnerabilities, and should only be used as a last resort.
+danger_accept_invalid_certs: false
+
+# Associative arrays of table sources
+table_sources:
+  public.geo_locations:
+    # Table source id (required)
+    id: public.geo_locations
+
+    # Table schema (required)
+    schema: public
+
+    # Table name (required)
+    table: geo_locations
+
+    # Geometry SRID (required)
+    srid: 4326
+
+    # Geometry column name (required)
+    geometry_column: coords
+
+    # Feature id column name
+    id_column: id
+
+    # An integer specifying the minimum zoom level
+    minzoom: 0
+
+    # An integer specifying the maximum zoom level. MUST be >= minzoom
+    maxzoom: 30
+
+    # The maximum extent of available map tiles. Bounds MUST define an area
+    # covered by all zoom levels. The bounds are represented in WGS:84
+    # latitude and longitude values, in the order left, bottom, right, top.
+    # Values may be integers or floating point numbers.
+    bounds: [-180.0, -90.0, 180.0, 90.0]
+
+    # Tile extent in tile coordinate space
+    extent: 4096
+
+    # Buffer distance in tile coordinate space to optionally clip geometries
+    buffer: 64
+
+    # Boolean to control if geometries should be clipped or encoded as is
+    clip_geom: true
+
+    # Geometry type
+    geometry_type: GEOMETRY
+
+    # List of columns, that should be encoded as tile properties (required)
+    properties:
+      id: int4
+
+# Associative arrays of function sources
+function_sources:
+  public.function_source:
+    # Function source id (required)
+    id: public.function_source
+
+    # Schema name (required)
+    schema: public
+
+    # Function name (required)
+    function: function_source
+
+    # An integer specifying the minimum zoom level
+    minzoom: 0
+
+    # An integer specifying the maximum zoom level. MUST be >= minzoom
+    maxzoom: 30
+
+    # The maximum extent of available map tiles. Bounds MUST define an area
+    # covered by all zoom levels. The bounds are represented in WGS:84
+    # latitude and longitude values, in the order left, bottom, right, top.
+    # Values may be integers or floating point numbers.
+    bounds: [-180.0, -90.0, 180.0, 90.0]
+
+  public.function_source_query_params:
+    id: public.function_source_query_params
+    schema: public
+    function: function_source_query_params
+    minzoom: 0
+    maxzoom: 30
+    bounds: [-180.0, -90.0, 180.0, 90.0]
