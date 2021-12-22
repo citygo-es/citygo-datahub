@@ -2,12 +2,15 @@ configs:
   bbnavi-datahub-credentials:
     external: true
     name: bbnavi-datahub-credentials
+  datahub-nginx-conf:
+    external: true
+    name: datahub-nginx-conf
   mainserver-common-master-key:
     external: true
     name: mainserver-common-master-key
-  smart-village-app-mainserver-nginx-conf:
+  martin-config-yml:
     external: true
-    name: smart-village-app-mainserver-nginx-conf
+    name: martin-config-yml
 networks:
   adminer:
     external: true
@@ -77,10 +80,11 @@ services:
       restart_policy:
         condition: on-failure
     environment:
+      DATADIR: /var/lib/postgresql/data
       POSTGRES_DB: bbnavihub
       POSTGRES_PASSWORT: bbnavihub
       POSTGRES_USER: bbnavihub
-    image: postgres:10.3-alpine
+    image: postgis/postgis:10-3.1
     networks:
       adminer:
         aliases:
@@ -115,7 +119,7 @@ services:
     - unicorn:/unicorn:rw
   nginx:
     configs:
-    - source: smart-village-app-mainserver-nginx-conf
+    - source: datahub-nginx-conf
       target: /etc/nginx/conf.d/default.conf
     deploy:
       labels:
@@ -145,6 +149,28 @@ services:
         - bbnavi-redis-server
     volumes:
     - redis_data:/bitnami/redis/data:rw
+  tile_server:
+    command: martin --config /martin_config.yml
+    configs:
+    - source: martin-config-yml
+      target: /martin_config.yml
+    deploy:
+      labels:
+        traefik.docker.network: public
+        traefik.enable: "true"
+        traefik.frontend.rule: Host:tiles.bbnavi.de
+        traefik.port: '5000'
+      restart_policy:
+        condition: on-failure
+    environment:
+      DATABASE_URL: postgres://bbnavihub@bbnavi-datahub-postgresql/bbnavihub
+    image: urbica/martin
+    networks:
+      bbnavi-datahub-postgresql: {}
+      public: {}
+    ports:
+    - published: 5000
+      target: 5000
 version: '3.7'
 volumes:
   assets: {}

@@ -1,6 +1,16 @@
 version: '3.7'
 
 services:
+  tile_server:
+    deploy:
+      restart_policy:
+        condition: on-failure
+      labels:
+        traefik.enable: "true"
+        traefik.port: 5000
+        traefik.docker.network: public
+        traefik.frontend.rule: Host:tiles.bbnavi.de
+
   delayed_job:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
     networks:
