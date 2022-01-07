@@ -12,6 +12,7 @@
 
 # Bespiel Datensatz
 
+- https://oms.wff.ch/calc.htm
 - lat: 52.546762, lng: 13.454414
 - geo = GeoLocation.new
 - geo.latitude = 52.546762
@@ -21,3 +22,5 @@
 - http://tile-server.smart-village.docker.localhost:5000/public.geo_locations/z/x/y.pbf
 - http://tile-server.smart-village.docker.localhost:5000/public.geo_locations/16/35217/21484.pbf
 - http://tile-server.smart-village.docker.localhost:5000/public.geo_locations/18/140869/85939.pbf
+- https://tiles.bbnavi.de/index.json
+- https://tiles.bbnavi.de/public.geo_locations/10/550/340.pbf
