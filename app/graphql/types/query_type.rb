@@ -18,6 +18,9 @@ module Types
     field :point_of_interest, QueryTypes::PointOfInterestType, null: false do
       argument :id, ID, required: true
     end
+    field :point_of_interest_by_geo_location, QueryTypes::PointOfInterestType, null: false do
+      argument :geo_location_id, ID, required: true
+    end
 
     field :event_records, function: Resolvers::EventRecordsSearch
     field :event_record, QueryTypes::EventRecordType, null: false do
@@ -85,6 +88,11 @@ module Types
 
     def point_of_interest(id:)
       PointOfInterest.find_by(id: id)
+    end
+
+    def point_of_interest_by_geo_location(geo_location_id:)
+      # TODO: check if `PointOfInterest`?
+      GeoLocation.find_by(id: geo_location_id).try(:geo_locateable).try(:addressable)
     end
 
     def event_record(id:)
