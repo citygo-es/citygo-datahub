@@ -696,6 +696,37 @@
               "deprecationReason": null
             },
             {
+              "name": "pointOfInterestByGeoLocation",
+              "description": null,
+              "args": [
+                {
+                  "name": "geoLocationId",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "ID",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PointOfInterest",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "pointsOfInterest",
               "description": null,
               "args": [
