@@ -13,7 +13,7 @@ namespace :setup do
 
     # Create Administrator
     admin_data_provider = DataProvider.create(name: "Administrator", description: "", logo: create_web_url)
-    admin = User.create(email: "admin@smart-village.app", password: admin_password, password_confirmation: admin_password, role: 1)
+    admin = User.create(email: "admin@bbnavi.de", password: admin_password, password_confirmation: admin_password, role: 1)
     admin.data_provider = admin_data_provider
     admin.save
     doorkeeper_app = Doorkeeper::Application.new name: "Administrator", redirect_uri: redirect_uri
@@ -23,7 +23,7 @@ namespace :setup do
 
     # Create Mobile App
     app_data_provider = DataProvider.create(name: "Mobile App", description: "", logo: create_web_url)
-    app_user = User.create(email: "mobile-app@smart-village.app", password: app_password, password_confirmation: app_password, role: 2)
+    app_user = User.create(email: "mobile-app@bbnavi.de", password: app_password, password_confirmation: app_password, role: 2)
     app_user.data_provider = app_data_provider
     app_user.save
     doorkeeper_app = Doorkeeper::Application.new name: "Mobile App (iOS/Android)", redirect_uri: redirect_uri, confidential: false
