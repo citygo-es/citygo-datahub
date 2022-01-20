@@ -21,13 +21,15 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
-  <%= link_to "BBNavi - Datahub", root_path, class: 'navbar-brand' %>
+  <%= link_to root_path, class: 'navbar-brand' do %>
+    <img id="image-3-98" alt="" src="https://bbnavi.de/wp-content/uploads/2021/09/bbnavi-logo-weiss-transparent.png" class="ct-image">
+  <% end %>
 
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto">
 
       <% if current_user.admin_role? %>
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if request.path == accounts_path %>">
           <%= link_to "Accounts", accounts_path, class: 'nav-link' %>
         </li>
 
@@ -35,15 +37,15 @@
           <%= link_to t('doorkeeper.layouts.admin.nav.applications'), oauth_applications_path, class: 'nav-link' %>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if request.path == static_contents_path %>">
           <%= link_to "Static Contents", static_contents_path, class: 'nav-link' %>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if request.path == app_user_contents_path %>">
           <%= link_to "App User Contents", app_user_contents_path, class: 'nav-link' %>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if request.path == categories_path %>">
           <%= link_to "Categories", categories_path, class: 'nav-link' %>
         </li>
 
@@ -58,7 +60,7 @@
         </li>
       <% end %>
 
-      <li class="nav-item">
+      <li class="nav-item <%= 'active' if request.path == edit_data_provider_path %>">
         <%= link_to "Data Provider", edit_data_provider_path, class: 'nav-link' %>
       </li>
 
