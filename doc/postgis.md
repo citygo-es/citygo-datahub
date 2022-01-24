@@ -24,3 +24,18 @@
 - http://tile-server.smart-village.docker.localhost:5000/public.geo_locations/18/140869/85939.pbf
 - https://tiles.bbnavi.de/index.json
 - https://tiles.bbnavi.de/public.geo_locations/10/550/340.pbf
+
+
+12.679978303645 52.505898119383
+x 35076
+y 21497
+z 16
+
+https://tiles.bbnavi.de/public.geo_locations/16/35076/21497.pbf
+http://localhost:8080/52.505898119383%2C12.679978303645/-
+
+
+# Poastgres View für Martin
+Category.find(15).points_of_interest.joins(location: :geo_location).select(:coords, :id).to_sql
+
+CREATE OR REPLACE VIEW "poi_coords" AS SELECT "coords", "attractions"."id", "attractions"."name" FROM "attractions" INNER JOIN "locations" ON "locations"."locateable_id" = "attractions"."id" AND "locations"."locateable_type" = 'Attraction' INNER JOIN "geo_locations" ON "geo_locations"."geo_locateable_id" = "locations"."id" AND "geo_locations"."geo_locateable_type" = 'Location' INNER JOIN "data_resource_categories" ON "attractions"."id" = "data_resource_categories"."data_resource_id" WHERE "attractions"."type" IN ('PointOfInterest') AND "data_resource_categories"."category_id" = 15 AND "data_resource_categories"."data_resource_type" = 'PointOfInterest';
