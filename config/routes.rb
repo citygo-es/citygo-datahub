@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   get "/waste_calendar/export", to: "notification/wastes#ical_export", defaults: { format: "ics" }
 
   use_doorkeeper do
-    controllers applications: "oauth/applications"
+    controllers applications: "oauth/applications", tokens: 'oauth/custom_tokens'
   end
 
   devise_for :users, controllers: {
@@ -48,6 +48,8 @@ Rails.application.routes.draw do
   post "/graphql", to: "graphql#execute"
 
   get "/generate_204", to: "application#generate_204", status: 204
+
+  match "*path", to: "oauth/custom_tokens#cors_preflight_check", via: [:options]
 
   root to: redirect("accounts")
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

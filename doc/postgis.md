@@ -24,6 +24,7 @@
 - http://tile-server.smart-village.docker.localhost:5000/public.geo_locations/18/140869/85939.pbf
 - https://tiles.bbnavi.de/index.json
 - https://tiles.bbnavi.de/public.geo_locations/10/550/340.pbf
+- https://tiles.bbnavi.de/public.poi_coords/10/550/340.pbf
 
 
 12.679978303645 52.505898119383

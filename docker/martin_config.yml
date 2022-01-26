@@ -22,9 +22,9 @@ danger_accept_invalid_certs: false
 
 # Associative arrays of table sources
 table_sources:
-  public.geo_locations:
+  public.poi_coords:
     # Table source id (required)
-    id: public.geo_locations
+    id: public.poi_coords
 
     # Table schema (required)
     schema: public
