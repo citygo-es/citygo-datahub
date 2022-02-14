@@ -27,7 +27,7 @@
       "queryVariables": {
         "name": "smart-village-app"
       },
-      "rootRouteName": "SmartVillageApp",
+      "rootRouteName": "BBNavi App",
       "subQuery": {
         "routeName": "Web",
         "buttonTitle": "Webseite öffnen",

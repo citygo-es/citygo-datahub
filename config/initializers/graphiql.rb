@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 GraphiQL::Rails.config.query_params = true
-GraphiQL::Rails.config.title = "SmartVillageApp GraphQL Documentation"
+GraphiQL::Rails.config.title = "bbnavi Datahub - GraphQL documentation"
 GraphiQL::Rails.config.initial_query = "# Load all events
 query {
   eventRecords {
