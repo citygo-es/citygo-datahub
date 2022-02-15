@@ -69,6 +69,7 @@ table_sources:
     properties:
       id: int4
       name: string
+      svg_icon: string
 
 # Associative arrays of function sources
 function_sources:
