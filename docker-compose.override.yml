@@ -28,5 +28,9 @@ services:
       - traefik.frontend.rule=Host:server.smart-village.docker.localhost
 
   db:
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - ./init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - 5432:5432
