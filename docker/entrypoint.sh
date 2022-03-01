@@ -7,10 +7,10 @@ DB=${DB_HOST:-bbnavi-datahub-postgresql:5432}
 dockerize -wait tcp://$DB -timeout 30s
 
 npm set audit false
+bundle exec rake db:gis:setup
 bundle exec rake db:migrate
 
 bundle exec rake graphql:schema:dump
-bundle exec rake db:gis:setup
 cp -r /app/public/* /assets/
 rm -f /unicorn.pid
 
