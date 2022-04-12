@@ -9,7 +9,7 @@ services:
       - traefik.enable=true
       - traefik.docker.network=public
       - traefik.port=5000
-      - traefik.frontend.rule=Host:tile-server.smart-village.docker.localhost
+      - traefik.frontend.rule=Host:tiles.bbnavi.localhost
   app:
     build:
       context: .
@@ -25,7 +25,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=public
-      - traefik.frontend.rule=Host:server.smart-village.docker.localhost
+      - traefik.frontend.rule=Host:datahub.bbnavi.localhost
 
   db:
     environment:
