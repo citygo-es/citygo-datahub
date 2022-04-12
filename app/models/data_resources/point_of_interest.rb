@@ -46,9 +46,15 @@ class PointOfInterest < Attraction
     {
       type: "Feature",
       properties: {
+        data_provider: data_provider.as_json(only: [:name, :description, :notice]),
         name: name,
         popupContent: geojson_description,
+        description: description,
+        opening_hours_description: opening_hours.map(&:description).flatten.compact.join,
         category: current_category.try(:name),
+        location: location.as_json(
+          except: [:id, :created_at, :updated_at, :region_id],
+          include: { geo_location: { only: [:latitude, :longitude] } }),
         tags: tag_list,
         icon: {
           id: "tmbIcon",
