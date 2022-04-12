@@ -1,6 +1,7 @@
 class Export::PointOfInterestsController < ApplicationController
 
-  # action_cache
+  before_action :doorkeeper_authorize!
+  skip_before_action :verify_authenticity_token
 
   def index
     @category = Category.find_by(id: params[:category_id]) if params[:category_id].present?
