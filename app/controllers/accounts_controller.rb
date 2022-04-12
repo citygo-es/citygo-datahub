@@ -9,7 +9,7 @@ class AccountsController < ApplicationController
   before_action :authenticate_admin
 
   def authenticate_admin
-    render inline: "not allowed", status: 404 unless current_user.admin_role?
+    redirect_to("/data_provider/edit") unless current_user.admin_role?
   end
 
   def index
