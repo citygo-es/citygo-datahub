@@ -49,6 +49,7 @@ class PointOfInterest < Attraction
         name: name,
         popupContent: geojson_description,
         category: current_category.try(:name),
+        tags: tag_list,
         icon: {
           id: "tmbIcon",
           svg: geojson_icon(current_category)
