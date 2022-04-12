@@ -6,8 +6,6 @@ services:
     environment:
       DATABASE_URL: postgres://bbnavihub@bbnavi-datahub-postgresql/bbnavihub
     command: "martin --config /martin_config.yml"
-    ports:
-      - 5000:5000
     configs:
       - source: martin-config-yml
         target: /martin_config.yml
@@ -101,8 +99,6 @@ services:
     volumes:
       - unicorn:/unicorn
       - assets:/public
-    labels:
-      - traefik.frontend.rule=Host:smartvillage.app
     deploy:
       restart_policy:
         condition: on-failure

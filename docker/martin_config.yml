@@ -67,7 +67,7 @@ table_sources:
 
     # List of columns, that should be encoded as tile properties (required)
     properties:
-      id: int4
+      id: int8
       name: string
       svg_icon: string
       tag_name: string
@@ -117,8 +117,8 @@ table_sources:
 
     # List of columns, that should be encoded as tile properties (required)
     properties:
-      id: string
-      datahub_id: int4
+      id: int8
+      datahub_id: string
       name: string
       svg_icon: string
       tag_name: string
@@ -168,8 +168,8 @@ table_sources:
 
     # List of columns, that should be encoded as tile properties (required)
     properties:
-      id: string
-      datahub_id: int4
+      id: int8
+      datahub_id: string
       name: string
       svg_icon: string
       tag_name: string
@@ -219,8 +219,8 @@ table_sources:
 
     # List of columns, that should be encoded as tile properties (required)
     properties:
-      id: string
-      datahub_id: int4
+      id: int8
+      datahub_id: string
       name: string
       svg_icon: string
       tag_name: string
@@ -270,7 +270,8 @@ table_sources:
 
     # List of columns, that should be encoded as tile properties (required)
     properties:
-      id: int4
+      id: int8
+      datahub_id: string
       name: string
       svg_icon: string
       tag_name: string
