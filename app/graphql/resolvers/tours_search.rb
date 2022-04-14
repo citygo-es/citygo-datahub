@@ -29,6 +29,9 @@ class Resolvers::ToursSearch
   option :dataProvider, type: types.String, with: :apply_data_provider
   option :dataProviderId, type: types.ID, with: :apply_data_provider_id
   option :category, type: types.String, with: :apply_category
+  option :categoryId, type: types.ID, with: :apply_category_id
+  option :categoryIds, type: types[types.ID], with: :apply_category_ids
+  option :location, type: types.String, with: :apply_location
 
   def apply_limit(scope, value)
     scope.limit(value)
@@ -56,6 +59,15 @@ class Resolvers::ToursSearch
 
   def apply_category(scope, value)
     scope.joins(:categories).where(categories: { name: value })
+  end
+
+  def apply_category_id(scope, value)
+    scope.by_category(value)
+  end
+  alias_method :apply_category_ids, :apply_category_id
+
+  def apply_location(scope, value)
+    scope.by_location(value)
   end
 
   def apply_order_with_created_at_desc(scope)

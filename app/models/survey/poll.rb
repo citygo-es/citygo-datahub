@@ -44,9 +44,9 @@ class Survey::Poll < ApplicationRecord
     )
 
     survey_poll_ids = without_times.pluck(:id) +
-                      without_end_time.map(&:dateable).map(&:id) +
-                      without_start_time.map(&:dateable).map(&:id) +
-                      with_times.map(&:dateable).map(&:id)
+                      without_end_time.map(&:dateable).compact.map(&:id) +
+                      without_start_time.map(&:dateable).compact.map(&:id) +
+                      with_times.map(&:dateable).compact.map(&:id)
 
     where(id: survey_poll_ids.uniq)
   }
@@ -64,6 +64,10 @@ class Survey::Poll < ApplicationRecord
 
   def question_title
     questions.try(:first).try(:title)
+  end
+
+  def question_allow_multiple_responses
+    questions.try(:first).try(:allow_multiple_responses)
   end
 
   def archived?
@@ -102,4 +106,6 @@ end
 #  updated_at       :datetime         not null
 #  visible          :boolean          default(TRUE)
 #  data_provider_id :integer
+#  can_comment      :boolean          default(TRUE)
+#  is_multilingual  :boolean          default(FALSE)
 #

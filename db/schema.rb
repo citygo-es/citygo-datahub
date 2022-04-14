@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_21_110102) do
+ActiveRecord::Schema.define(version: 2022_04_12_123620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "accessable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["accessable_type", "accessable_id"], name: "index_access_info_on_accessable_type_and_id"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -32,8 +31,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -44,7 +41,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "addresses", force: :cascade do |t|
@@ -57,7 +53,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "addressable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "app_user_contents", force: :cascade do |t|
@@ -86,15 +81,11 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
   create_table "attractions_certificates", force: :cascade do |t|
     t.bigint "attraction_id"
     t.bigint "certificate_id"
-    t.index ["attraction_id"], name: "index_attractions_certificates_on_attraction_id"
-    t.index ["certificate_id"], name: "index_attractions_certificates_on_certificate_id"
   end
 
   create_table "attractions_regions", force: :cascade do |t|
     t.bigint "region_id"
     t.bigint "attraction_id"
-    t.index ["attraction_id"], name: "index_attractions_regions_on_attraction_id"
-    t.index ["region_id"], name: "index_attractions_regions_on_region_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -104,7 +95,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.datetime "updated_at", null: false
     t.string "ancestry"
     t.text "svg_icon"
-    t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
   create_table "certificates", force: :cascade do |t|
@@ -112,7 +102,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "point_of_interest_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["point_of_interest_id"], name: "index_certificates_point_of_interest"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -125,7 +114,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "contactable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id"
   end
 
   create_table "content_blocks", force: :cascade do |t|
@@ -136,7 +124,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "content_blockable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["content_blockable_type", "content_blockable_id"], name: "index_content_blocks_on_content_blockable_type_and_id"
   end
 
   create_table "data_providers", force: :cascade do |t|
@@ -192,7 +179,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.integer "data_provider_id"
     t.string "external_id"
     t.boolean "visible", default: true
-    t.index ["region_id"], name: "index_event_records_on_region_id"
   end
 
   create_table "external_references", force: :cascade do |t|
@@ -216,7 +202,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "dateable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["dateable_type", "dateable_id"], name: "index_fixed_dates_dateable"
   end
 
   create_table "generic_items", force: :cascade do |t|
@@ -243,8 +228,7 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "geo_locateable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.geography "coords", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
-    t.index ["geo_locateable_type", "geo_locateable_id"], name: "index_geo_locations_geo_locateable"
+    t.geometry "coords", limit: {:srid=>0, :type=>"geometry"}
   end
 
   create_table "locations", force: :cascade do |t|
@@ -258,8 +242,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "region_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["locateable_type", "locateable_id"], name: "index_locations_on_locateable_type_and_locateable_id"
-    t.index ["region_id"], name: "index_locations_on_region_id"
   end
 
   create_table "lunch_offers", force: :cascade do |t|
@@ -288,7 +270,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "mediaable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mediaable_type", "mediaable_id"], name: "index_media_contents_mediaable"
   end
 
   create_table "news_items", force: :cascade do |t|
@@ -380,7 +361,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "openingable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["openingable_type", "openingable_id"], name: "index_opening_hours_on_openingable_type_and_openingable_id"
   end
 
   create_table "operating_companies", force: :cascade do |t|
@@ -389,7 +369,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "companyable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["companyable_type", "companyable_id"], name: "index_operating_companies_companyable"
   end
 
   create_table "prices", force: :cascade do |t|
@@ -408,7 +387,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "priceable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["priceable_type", "priceable_id"], name: "index_prices_on_priceable_type_and_priceable_id"
   end
 
   create_table "regions", force: :cascade do |t|
@@ -433,6 +411,7 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "version"
   end
 
   create_table "survey_comments", force: :cascade do |t|
@@ -450,6 +429,8 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.datetime "updated_at", null: false
     t.boolean "visible", default: true
     t.integer "data_provider_id"
+    t.boolean "can_comment", default: true
+    t.boolean "is_multilingual", default: false
   end
 
   create_table "survey_questions", force: :cascade do |t|
@@ -457,6 +438,7 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.text "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "allow_multiple_responses", default: false
   end
 
   create_table "survey_response_options", force: :cascade do |t|
@@ -475,21 +457,11 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.integer "tagger_id"
     t.string "context", limit: 128
     t.datetime "created_at"
-    t.index ["context"], name: "index_taggings_on_context"
-    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
-    t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
-    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
-    t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
-    t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
-    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
-    t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
   end
 
   create_table "tags", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "taggings_count", default: 0
-    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -556,12 +528,96 @@ ActiveRecord::Schema.define(version: 2021_12_21_110102) do
     t.bigint "web_urlable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["web_urlable_type", "web_urlable_id"], name: "index_web_urlable"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id", name: "active_storage_attachments_blob_id_fkey"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
+
+  create_view "poi_coords", sql_definition: <<-SQL
+      SELECT geo_locations.coords,
+      attractions.id,
+      attractions.name,
+      categories.svg_icon,
+      tags.name AS tag_name
+     FROM (((((((attractions
+       JOIN taggings ON (((taggings.taggable_id = attractions.id) AND ((taggings.taggable_type)::text = 'Attraction'::text) AND ((taggings.context)::text = 'tags'::text))))
+       JOIN tags ON ((tags.id = taggings.tag_id)))
+       JOIN addresses ON (((addresses.addressable_id = attractions.id) AND ((addresses.addressable_type)::text = 'Attraction'::text))))
+       JOIN geo_locations ON (((geo_locations.geo_locateable_id = addresses.id) AND ((geo_locations.geo_locateable_type)::text = 'Address'::text))))
+       JOIN data_resource_categories data_resource_categories_attractions_join ON (((data_resource_categories_attractions_join.data_resource_id = attractions.id) AND ((data_resource_categories_attractions_join.data_resource_type)::text = 'PointOfInterest'::text))))
+       JOIN categories ON ((categories.id = data_resource_categories_attractions_join.category_id)))
+       JOIN data_resource_categories ON ((attractions.id = data_resource_categories.data_resource_id)))
+    WHERE (((attractions.type)::text = 'PointOfInterest'::text) AND (data_resource_categories.category_id = 15) AND ((data_resource_categories.data_resource_type)::text = 'PointOfInterest'::text));
+  SQL
+  create_view "poi_coords_e_bike_rentals", sql_definition: <<-SQL
+      SELECT geo_locations.coords,
+      attractions.id,
+      concat('e_bike_rentals_', attractions.id) AS datahub_id,
+      attractions.name,
+      categories.svg_icon,
+      tags.name AS tag_name
+     FROM (((((((attractions
+       JOIN taggings ON (((taggings.taggable_id = attractions.id) AND ((taggings.taggable_type)::text = 'Attraction'::text) AND ((taggings.context)::text = 'tags'::text))))
+       JOIN tags ON ((tags.id = taggings.tag_id)))
+       JOIN addresses ON (((addresses.addressable_id = attractions.id) AND ((addresses.addressable_type)::text = 'Attraction'::text))))
+       JOIN geo_locations ON (((geo_locations.geo_locateable_id = addresses.id) AND ((geo_locations.geo_locateable_type)::text = 'Address'::text))))
+       JOIN data_resource_categories data_resource_categories_attractions_join ON (((data_resource_categories_attractions_join.data_resource_id = attractions.id) AND ((data_resource_categories_attractions_join.data_resource_type)::text = 'PointOfInterest'::text))))
+       JOIN categories ON ((categories.id = data_resource_categories_attractions_join.category_id)))
+       JOIN data_resource_categories ON ((attractions.id = data_resource_categories.data_resource_id)))
+    WHERE (((attractions.type)::text = 'PointOfInterest'::text) AND (data_resource_categories.category_id = 15) AND ((data_resource_categories.data_resource_type)::text = 'PointOfInterest'::text) AND ((tags.name)::text = 'E-Bike-Vermietung'::text));
+  SQL
+  create_view "poi_coords_e_bike_charging_stations", sql_definition: <<-SQL
+      SELECT geo_locations.coords,
+      attractions.id,
+      concat('e_bike_charging_stations_', attractions.id) AS datahub_id,
+      attractions.name,
+      categories.svg_icon,
+      tags.name AS tag_name
+     FROM (((((((attractions
+       JOIN taggings ON (((taggings.taggable_id = attractions.id) AND ((taggings.taggable_type)::text = 'Attraction'::text) AND ((taggings.context)::text = 'tags'::text))))
+       JOIN tags ON ((tags.id = taggings.tag_id)))
+       JOIN addresses ON (((addresses.addressable_id = attractions.id) AND ((addresses.addressable_type)::text = 'Attraction'::text))))
+       JOIN geo_locations ON (((geo_locations.geo_locateable_id = addresses.id) AND ((geo_locations.geo_locateable_type)::text = 'Address'::text))))
+       JOIN data_resource_categories data_resource_categories_attractions_join ON (((data_resource_categories_attractions_join.data_resource_id = attractions.id) AND ((data_resource_categories_attractions_join.data_resource_type)::text = 'PointOfInterest'::text))))
+       JOIN categories ON ((categories.id = data_resource_categories_attractions_join.category_id)))
+       JOIN data_resource_categories ON ((attractions.id = data_resource_categories.data_resource_id)))
+    WHERE (((attractions.type)::text = 'PointOfInterest'::text) AND (data_resource_categories.category_id = 15) AND ((data_resource_categories.data_resource_type)::text = 'PointOfInterest'::text) AND ((tags.name)::text = 'E-Bike-Aufladestation'::text));
+  SQL
+  create_view "poi_coords_bike_repair_shops", sql_definition: <<-SQL
+      SELECT geo_locations.coords,
+      attractions.id,
+      concat('bike_repair_shops_', attractions.id) AS datahub_id,
+      attractions.name,
+      categories.svg_icon,
+      tags.name AS tag_name
+     FROM (((((((attractions
+       JOIN taggings ON (((taggings.taggable_id = attractions.id) AND ((taggings.taggable_type)::text = 'Attraction'::text) AND ((taggings.context)::text = 'tags'::text))))
+       JOIN tags ON ((tags.id = taggings.tag_id)))
+       JOIN addresses ON (((addresses.addressable_id = attractions.id) AND ((addresses.addressable_type)::text = 'Attraction'::text))))
+       JOIN geo_locations ON (((geo_locations.geo_locateable_id = addresses.id) AND ((geo_locations.geo_locateable_type)::text = 'Address'::text))))
+       JOIN data_resource_categories data_resource_categories_attractions_join ON (((data_resource_categories_attractions_join.data_resource_id = attractions.id) AND ((data_resource_categories_attractions_join.data_resource_type)::text = 'PointOfInterest'::text))))
+       JOIN categories ON ((categories.id = data_resource_categories_attractions_join.category_id)))
+       JOIN data_resource_categories ON ((attractions.id = data_resource_categories.data_resource_id)))
+    WHERE (((attractions.type)::text = 'PointOfInterest'::text) AND (data_resource_categories.category_id = 15) AND ((data_resource_categories.data_resource_type)::text = 'PointOfInterest'::text) AND ((tags.name)::text = 'Werkstatt / Reparatur'::text));
+  SQL
+  create_view "poi_coords_bike_rentals", sql_definition: <<-SQL
+      SELECT geo_locations.coords,
+      attractions.id,
+      concat('bike_rentals_', attractions.id) AS datahub_id,
+      attractions.name,
+      categories.svg_icon,
+      tags.name AS tag_name
+     FROM (((((((attractions
+       JOIN taggings ON (((taggings.taggable_id = attractions.id) AND ((taggings.taggable_type)::text = 'Attraction'::text) AND ((taggings.context)::text = 'tags'::text))))
+       JOIN tags ON ((tags.id = taggings.tag_id)))
+       JOIN addresses ON (((addresses.addressable_id = attractions.id) AND ((addresses.addressable_type)::text = 'Attraction'::text))))
+       JOIN geo_locations ON (((geo_locations.geo_locateable_id = addresses.id) AND ((geo_locations.geo_locateable_type)::text = 'Address'::text))))
+       JOIN data_resource_categories data_resource_categories_attractions_join ON (((data_resource_categories_attractions_join.data_resource_id = attractions.id) AND ((data_resource_categories_attractions_join.data_resource_type)::text = 'PointOfInterest'::text))))
+       JOIN categories ON ((categories.id = data_resource_categories_attractions_join.category_id)))
+       JOIN data_resource_categories ON ((attractions.id = data_resource_categories.data_resource_id)))
+    WHERE (((attractions.type)::text = 'PointOfInterest'::text) AND (data_resource_categories.category_id = 15) AND ((data_resource_categories.data_resource_type)::text = 'PointOfInterest'::text) AND ((tags.name)::text = 'Fahrradvermietung'::text));
+  SQL
 end

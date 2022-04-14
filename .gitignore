@@ -47,3 +47,9 @@ active_record_cheat_sheet.md
 # DeepCode
 .dccache
 releases/bbnavi/credentials.yml
+
+node_modules/
+yarn.lock
+
+# Ignore graphql schema files as they were built on server, see entrypoint.sh
+public/schema.*

@@ -20,8 +20,18 @@ class Attraction < ApplicationRecord
   has_one :operating_company, as: :companyable, dependent: :destroy
   has_many :web_urls, as: :web_urlable, dependent: :destroy
   has_one :external_reference, as: :external, dependent: :destroy
+  has_one :location, as: :locateable, dependent: :destroy
 
   scope :visible, -> { where(visible: true) }
+
+  scope :by_category, lambda { |category_id|
+    where(categories: { id: category_id }).joins(:categories)
+  }
+
+  scope :by_location, lambda { |location_name|
+    where(locations: { name: location_name }).or(where(addresses: { city: location_name }))
+      .left_joins(:location).left_joins(:addresses)
+  }
 
   validates_presence_of :name
   acts_as_taggable
@@ -30,7 +40,7 @@ class Attraction < ApplicationRecord
   accepts_nested_attributes_for :addresses, :contact, :media_contents,
                                 :accessibility_information, :operating_company,
                                 :data_provider, :certificates,
-                                :regions
+                                :regions, :location
 
   # Sicherstellung der Abwärtskompatibilität seit 09/2020
   def category
@@ -52,11 +62,12 @@ class Attraction < ApplicationRecord
         categories << category_to_add unless categories.include?(category_to_add)
       end
 
-      # Wenn mehrere Kategorein auf einmal gesetzt werden
+      # Wenn mehrere Kategorien auf einmal gesetzt werden
       # ist der attr_accessor :category_names befüllt
       if category_names.present?
-        category_names.each do |cat|
-          category_to_add = Category.where(name: cat[:name]).first_or_create
+        category_names.each do |category|
+          next unless category[:name].present?
+          category_to_add = Category.where(name: category[:name]).first_or_create
           categories << category_to_add unless categories.include?(category_to_add)
         end
       end

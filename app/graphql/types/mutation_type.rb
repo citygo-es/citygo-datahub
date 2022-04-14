@@ -11,13 +11,17 @@ module Types
     field :create_app_user_content, mutation: Mutations::CreateAppUserContent
     field :create_waste_pick_up_time, mutation: Mutations::CreateWastePickUpTime
     field :create_or_update_survey_poll, mutation: Mutations::CreateOrUpdateSurveyPoll
+    field :create_or_update_static_content, mutation: Mutations::CreateOrUpdateStaticContent
 
     # destroys
     field :destroy_record, mutation: Mutations::DestroyRecord
 
     # actions
     field :change_visibility, mutation: Mutations::ChangeVisibility
-    field :vote_for_survey, mutation: Mutations::VoteForSurvey
+    field :vote_for_survey,
+          mutation: Mutations::VoteForSurvey,
+          deprecation_reason: "Use `votesForSurvey` instead."
+    field :votes_for_survey, mutation: Mutations::VotesForSurvey
     field :comment_survey, mutation: Mutations::CommentSurvey
   end
 end

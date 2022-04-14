@@ -8,12 +8,17 @@ class AccountsController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin
 
+  include SortableController
+
   def authenticate_admin
     redirect_to("/data_provider/edit") unless current_user.admin_role?
   end
 
   def index
-    @users = User.all
+    @users = User
+      .sorted_for_params(params)
+      .where_email_contains(params[:query])
+      .page(params[:page])
   end
 
   def edit
@@ -95,6 +100,7 @@ class AccountsController < ApplicationController
         :role_constuction_site,
         :role_survey,
         :role_encounter_support,
+        :role_static_contents,
         logo_attributes: %i[
           id
           url
