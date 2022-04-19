@@ -12,8 +12,8 @@ end
 # Table name: operating_companies
 #
 #  id               :bigint           not null, primary key
-#  name             :string(255)
-#  companyable_type :string(255)
+#  name             :string
+#  companyable_type :string
 #  companyable_id   :bigint
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

@@ -100,8 +100,8 @@ end
 # Table name: survey_polls
 #
 #  id               :bigint           not null, primary key
-#  title            :text(4294967295)
-#  description      :text(4294967295)
+#  title            :text
+#  description      :text
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  visible          :boolean          default(TRUE)

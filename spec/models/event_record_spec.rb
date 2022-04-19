@@ -124,12 +124,12 @@ end
 #  id               :bigint           not null, primary key
 #  parent_id        :integer
 #  region_id        :bigint
-#  description      :text(65535)
+#  description      :text
 #  repeat           :boolean
-#  title            :string(255)
+#  title            :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  data_provider_id :integer
-#  external_id      :string(255)
+#  external_id      :string
 #  visible          :boolean          default(TRUE)
 #

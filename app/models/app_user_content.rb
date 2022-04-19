@@ -17,9 +17,9 @@ end
 # Table name: app_user_contents
 #
 #  id          :bigint           not null, primary key
-#  content     :text(65535)
-#  data_type   :string(255)
-#  data_source :string(255)
+#  content     :text
+#  data_type   :string
+#  data_source :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

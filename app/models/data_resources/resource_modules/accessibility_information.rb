@@ -12,9 +12,9 @@ end
 # Table name: accessibility_informations
 #
 #  id              :bigint           not null, primary key
-#  description     :text(65535)
-#  types           :string(255)
-#  accessable_type :string(255)
+#  description     :text
+#  types           :string
+#  accessable_type :string
 #  accessable_id   :bigint
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

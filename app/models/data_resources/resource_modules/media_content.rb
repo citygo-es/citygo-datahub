@@ -57,12 +57,12 @@ end
 # Table name: media_contents
 #
 #  id             :bigint           not null, primary key
-#  caption_text   :text(65535)
-#  copyright      :string(255)
-#  height         :string(255)
-#  width          :string(255)
-#  content_type   :string(255)
-#  mediaable_type :string(255)
+#  caption_text   :text
+#  copyright      :string
+#  height         :string
+#  width          :string
+#  content_type   :string
+#  mediaable_type :string
 #  mediaable_id   :bigint
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

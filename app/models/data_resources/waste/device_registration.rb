@@ -13,13 +13,13 @@ end
 # Table name: waste_device_registrations
 #
 #  id                        :bigint           not null, primary key
-#  notification_device_token :string(255)
-#  street                    :string(255)
-#  city                      :string(255)
-#  zip                       :string(255)
+#  notification_device_token :string
+#  street                    :string
+#  city                      :string
+#  zip                       :string
 #  notify_days_before        :integer          default(0)
 #  notify_at                 :time
-#  notify_for_waste_type     :string(255)
+#  notify_for_waste_type     :string
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #

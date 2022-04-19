@@ -10,12 +10,12 @@ end
 # Table name: data_providers
 #
 #  id              :bigint           not null, primary key
-#  name            :string(255)
-#  description     :text(65535)
+#  name            :string
+#  description     :text
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  always_recreate :text(65535)
-#  roles           :text(65535)
+#  always_recreate :text
+#  roles           :text
 #  data_type       :integer          default("general_importer")
-#  notice          :text(65535)
+#  notice          :text
 #

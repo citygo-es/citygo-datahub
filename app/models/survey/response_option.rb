@@ -22,7 +22,7 @@ end
 #
 #  id                 :bigint           not null, primary key
 #  survey_question_id :integer
-#  title              :text(4294967295)
+#  title              :text
 #  votes_count        :integer          default(0)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
