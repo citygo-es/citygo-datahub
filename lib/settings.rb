@@ -1,6 +1,6 @@
 class Settings
   def self.config
-    current_community = ENV["SVA_COMMUNITY"].presence || "local-localhost"
+    current_community = "bbnavi"
     file_name = "releases/#{current_community}/credentials.yml"
     return {} unless File.exist?(file_name)
 
@@ -16,5 +16,4 @@ class Settings
   def self.method_missing(method_name)
     Settings.config[method_name.to_sym]
   end
-
 end
