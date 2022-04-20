@@ -40,7 +40,7 @@ class Resolvers::CategoriesSearch
   end
 
   def apply_children_of(scope, value)
-    scope.where(id: value).first.subtree
+    scope.where(id: value).first.descendants
   end
 
   def apply_order(scope, value)
