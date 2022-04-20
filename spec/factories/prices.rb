@@ -18,8 +18,8 @@ end
 # Table name: prices
 #
 #  id                 :bigint           not null, primary key
-#  name               :string(255)
-#  amount             :float(24)
+#  name               :string
+#  amount             :float
 #  group_price        :boolean
 #  age_from           :integer
 #  age_to             :integer
@@ -27,9 +27,9 @@ end
 #  max_adult_count    :integer
 #  min_children_count :integer
 #  max_children_count :integer
-#  description        :text(65535)
-#  category           :string(255)
-#  priceable_type     :string(255)
+#  description        :text
+#  category           :string
+#  priceable_type     :string
 #  priceable_id       :bigint
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

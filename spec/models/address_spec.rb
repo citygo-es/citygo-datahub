@@ -18,12 +18,12 @@ end
 # Table name: addresses
 #
 #  id               :bigint           not null, primary key
-#  addition         :string(255)
-#  city             :string(255)
-#  street           :string(255)
-#  zip              :string(255)
+#  addition         :string
+#  city             :string
+#  street           :string
+#  zip              :string
 #  kind             :integer          default("default")
-#  addressable_type :string(255)
+#  addressable_type :string
 #  addressable_id   :bigint
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

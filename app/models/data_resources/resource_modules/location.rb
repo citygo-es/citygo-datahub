@@ -26,12 +26,12 @@ end
 # Table name: locations
 #
 #  id              :bigint           not null, primary key
-#  name            :string(255)
-#  department      :string(255)
-#  district        :string(255)
-#  state           :string(255)
-#  country         :string(255)
-#  locateable_type :string(255)
+#  name            :string
+#  department      :string
+#  district        :string
+#  state           :string
+#  country         :string
+#  locateable_type :string
 #  locateable_id   :bigint
 #  region_id       :bigint
 #  created_at      :datetime         not null

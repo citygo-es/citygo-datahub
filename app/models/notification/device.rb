@@ -20,7 +20,7 @@ end
 # Table name: notification_devices
 #
 #  id          :bigint           not null, primary key
-#  token       :string(255)
+#  token       :string
 #  device_type :integer          default("undefined")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

@@ -85,9 +85,10 @@ end
 # Table name: categories
 #
 #  id         :bigint           not null, primary key
-#  name       :string(255)
+#  name       :string
 #  tmb_id     :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  ancestry   :string(255)
+#  ancestry   :string
+#  svg_icon   :text
 #

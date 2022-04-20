@@ -26,7 +26,7 @@ end
 # Table name: waste_location_types
 #
 #  id         :bigint           not null, primary key
-#  waste_type :string(255)
+#  waste_type :string
 #  address_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

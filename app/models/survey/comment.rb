@@ -25,7 +25,7 @@ end
 #
 #  id             :bigint           not null, primary key
 #  survey_poll_id :integer
-#  message        :text(65535)
+#  message        :text
 #  visible        :boolean          default(FALSE)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

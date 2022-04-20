@@ -3,6 +3,7 @@
 module Mutations
   class CreatePointOfInterest < BaseMutation
     argument :id, ID, required: false
+    argument :external_id, String, required: false
     argument :force_create, Boolean, required: false
     argument :name, String, required: true
     argument :description, String, required: false
@@ -23,6 +24,10 @@ module Mutations
     argument :contact, Types::InputTypes::ContactInput,
              required: false, as: :contact_attributes,
              prepare: ->(contact, _ctx) { contact.to_h }
+
+    argument :open_street_map, Types::InputTypes::OpenStreetMapInput,
+             required: false, as: :open_street_map_attributes,
+             prepare: ->(open_street_map, _ctx) { open_street_map.to_h }
 
     argument :price_informations, [Types::InputTypes::PriceInput],
              required: false, as: :price_informations_attributes,

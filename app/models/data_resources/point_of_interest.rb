@@ -16,10 +16,13 @@ class PointOfInterest < Attraction
   has_many :opening_hours, as: :openingable, dependent: :destroy
   has_many :price_informations, as: :priceable, class_name: "Price", dependent: :destroy
   has_many :lunches, dependent: :destroy
+  has_one :open_street_map, as: :osm_able, class_name: "OpenStreetMap"
 
-  accepts_nested_attributes_for :price_informations, :opening_hours, :lunches
+  accepts_nested_attributes_for :price_informations, :opening_hours, :lunches, :open_street_map
 
   def unique_id
+    return external_id if external_id.present?
+
     fields = [name, type]
 
     first_address = addresses.first
@@ -85,15 +88,16 @@ end
 # Table name: attractions
 #
 #  id                      :bigint           not null, primary key
-#  name                    :string(255)
-#  description             :text(65535)
-#  mobile_description      :text(65535)
+#  external_id             :text
+#  name                    :string
+#  description             :text
+#  mobile_description      :text
 #  active                  :boolean          default(TRUE)
 #  length_km               :integer
 #  means_of_transportation :integer
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  type                    :string(255)      default("PointOfInterest"), not null
+#  type                    :string           default("PointOfInterest"), not null
 #  data_provider_id        :integer
 #  visible                 :boolean          default(TRUE)
 #

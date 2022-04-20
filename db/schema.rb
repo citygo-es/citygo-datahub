@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_12_123620) do
+ActiveRecord::Schema.define(version: 2022_04_19_104452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2022_04_12_123620) do
   end
 
   create_table "attractions", force: :cascade do |t|
-    t.integer "external_id"
+    t.text "external_id"
     t.string "name"
     t.text "description"
     t.text "mobile_description"
@@ -340,6 +340,24 @@ ActiveRecord::Schema.define(version: 2022_04_12_123620) do
     t.string "owner_type"
     t.index ["owner_id", "owner_type"], name: "index_oauth_applications_on_owner_id_and_owner_type"
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
+  end
+
+  create_table "open_street_maps", force: :cascade do |t|
+    t.string "parking"
+    t.integer "capacity"
+    t.string "capacity_charging"
+    t.string "capacity_disabled"
+    t.string "surface"
+    t.string "fee"
+    t.text "website"
+    t.string "lit"
+    t.string "shelter"
+    t.string "utilization"
+    t.string "osm_able_type"
+    t.bigint "osm_able_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["osm_able_type", "osm_able_id"], name: "index_open_street_maps_on_osm_able_type_and_osm_able_id"
   end
 
   create_table "open_weather_maps", force: :cascade do |t|

@@ -19,9 +19,9 @@ end
 # Table name: web_urls
 #
 #  id               :bigint           not null, primary key
-#  url              :text(65535)
-#  description      :text(65535)
-#  web_urlable_type :string(255)
+#  url              :text
+#  description      :text
+#  web_urlable_type :string
 #  web_urlable_id   :bigint
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

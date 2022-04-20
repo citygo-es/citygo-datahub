@@ -12,7 +12,7 @@ end
 #
 #  id                 :bigint           not null, primary key
 #  data_resource_id   :integer
-#  data_resource_type :string(255)
+#  data_resource_type :string
 #  category_id        :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

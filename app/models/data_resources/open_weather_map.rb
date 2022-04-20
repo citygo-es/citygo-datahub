@@ -19,7 +19,7 @@ end
 # Table name: open_weather_maps
 #
 #  id         :bigint           not null, primary key
-#  data       :text(65535)
+#  data       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

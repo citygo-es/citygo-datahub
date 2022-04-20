@@ -21,9 +21,9 @@ end
 # Table name: lunches
 #
 #  id                           :bigint           not null, primary key
-#  text                         :text(65535)
+#  text                         :text
 #  point_of_interest_id         :integer
-#  point_of_interest_attributes :string(255)
+#  point_of_interest_attributes :string
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
 #

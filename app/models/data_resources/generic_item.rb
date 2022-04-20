@@ -89,18 +89,18 @@ end
 # Table name: generic_items
 #
 #  id               :bigint           not null, primary key
-#  generic_type     :string(255)
-#  author           :text(65535)
+#  generic_type     :string
+#  author           :text
 #  publication_date :datetime
 #  published_at     :datetime
-#  external_id      :text(65535)
+#  external_id      :text
 #  visible          :boolean          default(TRUE)
-#  title            :text(65535)
-#  teaser           :text(65535)
-#  description      :text(65535)
+#  title            :text
+#  teaser           :text
+#  description      :text
 #  data_provider_id :integer
-#  payload          :text(65535)
-#  ancestry         :string(255)
+#  payload          :text
+#  ancestry         :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

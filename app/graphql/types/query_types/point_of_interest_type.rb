@@ -3,6 +3,7 @@
 module Types
   class QueryTypes::PointOfInterestType < Types::BaseObject
     field :id, ID, null: true
+    field :external_id, String, null: true
     field :visible, Boolean, null: true
     field :settings, QueryTypes::SettingType, null: true
     field :name, String, null: true
@@ -15,6 +16,7 @@ module Types
     field :location, QueryTypes::LocationType, null: true
     field :data_provider, QueryTypes::DataProviderType, null: true
     field :contact, QueryTypes::ContactType, null: true
+    field :open_street_map, QueryTypes::OpenStreetMapType, null: true
     field :web_urls, [QueryTypes::WebUrlType], null: true
     field :media_contents, [QueryTypes::MediaContentType], null: true
     field :operating_company, QueryTypes::OperatingCompanyType, null: true
