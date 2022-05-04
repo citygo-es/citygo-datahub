@@ -21,6 +21,7 @@ class PointOfInterest < Attraction
   accepts_nested_attributes_for :price_informations, :opening_hours, :lunches, :open_street_map
 
   def unique_id
+    generate_external_id_for_rideshare_points
     return external_id if external_id.present?
 
     fields = [name, type]
@@ -80,6 +81,31 @@ class PointOfInterest < Attraction
     return fallback if current_category.svg_icon.blank?
 
     current_category.svg_icon
+  end
+
+  private
+
+  # POIs in der Kategorie "Mitfahrpunkte" haben ein eigenes ExternalID Schema
+  # z.b.: "bbnavi:12345:0001"
+  def generate_external_id_for_rideshare_points
+    return if external_id.blank?
+
+    # wenn der POi nicht im Unterbaum "Mitfahrpunkte" ist, dann abbrechen
+    category_ids_to_check = Category.find_by(name: "Mitfahrpunkte").descendant_ids
+    return unless (category_ids & category_ids_to_check).any?
+
+    # Die RideShare haben folgendes Schema:
+    # bbnavi:12345:0001
+    rideshare_cat_schema = "bbnavi\:\\d{5}\:\\d+"
+    # wenn external_id existiert und dem Schema entspricht, dann nichts machen
+    return if external_id.match(rideshare_cat_schema).present?
+
+    # wenn external_id existiert und dem Schema nicht entspricht, dann neu generieren.
+    # die external_id beinhaltet dann bisher den 5 stellige allgemeinen Gemeindeschlüssel.
+    # dieser wird dann nach dem Schema oben mit einer noch nicht verwendeten fortlaufenden Zahl neu generiert.
+    last_used_id = PointOfInterest.where("external_id LIKE 'bbnavi:#{external_id}:%'").pluck(:external_id).map{|a| a.split(":").last.to_i}.max
+    new_id = (last_used_id.to_i + 1).to_s.rjust(4, "0")
+    update(external_id: "bbnavi:#{external_id}:#{new_id}")
   end
 end
 
