@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :export do
     get "point_of_interests", to: "point_of_interests#index", defaults: { format: "geojson" }
     get "point_of_interests/:category_id", to: "point_of_interests#index", defaults: { format: "geojson" }
+    get "rideshare_points", to: "point_of_interests#rideshare_points", defaults: { format: "json" }
   end
 
   namespace :notification do
