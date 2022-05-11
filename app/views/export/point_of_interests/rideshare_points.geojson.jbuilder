@@ -2,8 +2,8 @@ json.type "FeatureCollection"
 json.features do
   json.array! @rideshare_points.each do |rideshare_point|
     json.type "Feature"
+    json.id rideshare_point.external_id
     json.properties do
-      json.id rideshare_point.external_id
       json.name rideshare_point.name
       json.description rideshare_point.description
       json.type rideshare_point.categories.map(&:name).join(", ")
