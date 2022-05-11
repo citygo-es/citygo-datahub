@@ -47,7 +47,7 @@ json.features do
     end
     json.geometry do
       json.type "Point"
-      json.coordinates rideshare_point.location.try(:geo_location).try(:coordinates)
+      json.coordinates rideshare_point.address.try(:geo_location).try(:coordinates)
     end
   end
 end
