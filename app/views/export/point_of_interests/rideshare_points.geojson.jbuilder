@@ -1,13 +1,13 @@
 json.type "FeatureCollection"
 json.features do
   json.array! @rideshare_points.each do |rideshare_point|
+    address = rideshare_point.addresses.first
     json.type "Feature"
     json.id rideshare_point.external_id
     json.properties do
       json.name rideshare_point.name
       json.description rideshare_point.description
       json.type rideshare_point.categories.map(&:name).join(", ")
-      address = rideshare_point.addresses.first
       json.address do
         json.street address.try(:street)
         json.zip address.try(:zip)
@@ -47,7 +47,7 @@ json.features do
     end
     json.geometry do
       json.type "Point"
-      json.coordinates rideshare_point.address.try(:geo_location).try(:coordinates)
+      json.coordinates address.try(:geo_location).try(:coordinates)
     end
   end
 end
