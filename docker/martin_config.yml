@@ -89,7 +89,7 @@ table_sources:
     geometry_column: coords
 
     # Feature id column name
-    id_column: id
+    id_column: ~
 
     # An integer specifying the minimum zoom level
     minzoom: 0
@@ -117,8 +117,8 @@ table_sources:
 
     # List of columns, that should be encoded as tile properties (required)
     properties:
-      id: int8
-      datahub_id: string
+      id: string
+      datahub_id: int8
       name: string
       svg_icon: string
       tag_name: string
@@ -140,7 +140,7 @@ table_sources:
     geometry_column: coords
 
     # Feature id column name
-    id_column: id
+    id_column: ~
 
     # An integer specifying the minimum zoom level
     minzoom: 0
@@ -168,8 +168,8 @@ table_sources:
 
     # List of columns, that should be encoded as tile properties (required)
     properties:
-      id: int8
-      datahub_id: string
+      id: string
+      datahub_id: int8
       name: string
       svg_icon: string
       tag_name: string
@@ -191,7 +191,7 @@ table_sources:
     geometry_column: coords
 
     # Feature id column name
-    id_column: id
+    id_column: ~
 
     # An integer specifying the minimum zoom level
     minzoom: 0
@@ -219,8 +219,8 @@ table_sources:
 
     # List of columns, that should be encoded as tile properties (required)
     properties:
-      id: int8
-      datahub_id: string
+      id: string
+      datahub_id: int8
       name: string
       svg_icon: string
       tag_name: string
@@ -242,7 +242,7 @@ table_sources:
     geometry_column: coords
 
     # Feature id column name
-    id_column: id
+    id_column: ~
 
     # An integer specifying the minimum zoom level
     minzoom: 0
@@ -270,40 +270,8 @@ table_sources:
 
     # List of columns, that should be encoded as tile properties (required)
     properties:
-      id: int8
-      datahub_id: string
+      id: string
+      datahub_id: int8
       name: string
       svg_icon: string
       tag_name: string
-
-# Associative arrays of function sources
-function_sources:
-  public.function_source:
-    # Function source id (required)
-    id: public.function_source
-
-    # Schema name (required)
-    schema: public
-
-    # Function name (required)
-    function: function_source
-
-    # An integer specifying the minimum zoom level
-    minzoom: 0
-
-    # An integer specifying the maximum zoom level. MUST be >= minzoom
-    maxzoom: 30
-
-    # The maximum extent of available map tiles. Bounds MUST define an area
-    # covered by all zoom levels. The bounds are represented in WGS:84
-    # latitude and longitude values, in the order left, bottom, right, top.
-    # Values may be integers or floating point numbers.
-    bounds: [-180.0, -90.0, 180.0, 90.0]
-
-  public.function_source_query_params:
-    id: public.function_source_query_params
-    schema: public
-    function: function_source_query_params
-    minzoom: 0
-    maxzoom: 30
-    bounds: [-180.0, -90.0, 180.0, 90.0]
