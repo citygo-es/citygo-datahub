@@ -8,9 +8,9 @@ configs:
   mainserver-common-master-key:
     external: true
     name: mainserver-common-master-key
-  martin-config-yml:
+  martin-config-yml-2022-05-12:
     external: true
-    name: martin-config-yml
+    name: martin-config-yml-2022-05-12
 networks:
   adminer:
     external: true
@@ -24,6 +24,9 @@ networks:
   public:
     external: true
     name: public
+  ssh_public_keys:
+    external: true
+    name: ssh_public_keys
 services:
   app:
     configs:
@@ -130,8 +133,6 @@ services:
       restart_policy:
         condition: on-failure
     image: nginx
-    labels:
-      traefik.frontend.rule: Host:smartvillage.app
     networks:
       default: {}
       public: {}
@@ -149,10 +150,41 @@ services:
         - bbnavi-redis-server
     volumes:
     - redis_data:/bitnami/redis/data:rw
+  ssh-server:
+    deploy:
+      labels:
+        traefik.docker.network: public
+        traefik.enable: "true"
+        traefik.frontend.passHostHeader: "true"
+        traefik.frontend.redirect.entryPoint: https
+        traefik.frontend.rule: Host:ssh.datahub.bbnavi.de
+        traefik.port: '80'
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    environment:
+      DOCKER_MODS: linuxserver/mods:openssh-server-ssh-tunnel
+      PGID: '0'
+      PUBLIC_KEY_DIR: /public_keys
+      PUID: '0'
+      SUDO_ACCESS: "true"
+      TZ: Europe/Berlin
+      USER_NAME: bbnavi
+    expose:
+    - '5432'
+    image: ghcr.io/linuxserver/openssh-server
+    networks:
+      bbnavi-datahub-postgresql: {}
+      public: {}
+    ports:
+    - published: 2222
+      target: 2222
+    volumes:
+    - ssh_public_keys:/public_keys:rw
   tile_server:
     command: martin --config /martin_config.yml
     configs:
-    - source: martin-config-yml
+    - source: martin-config-yml-2022-05-12
       target: /martin_config.yml
     deploy:
       labels:
@@ -180,5 +212,8 @@ volumes:
   redis_data:
     external: true
     name: redis_data
+  ssh_public_keys:
+    external: true
+    name: ssh_public_keys
   unicorn: {}
 

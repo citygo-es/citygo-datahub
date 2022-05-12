@@ -74,7 +74,7 @@ services:
         traefik.frontend.redirect.entryPoint: https
         traefik.frontend.rule: Host:ssh.datahub.bbnavi.de
         traefik.port: '80'
-      replicas: 1
+      replicas: 0
       restart_policy:
         condition: on-failure
     environment:
