@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_12_122232) do
+ActiveRecord::Schema.define(version: 2022_05_19_114405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -637,5 +637,19 @@ ActiveRecord::Schema.define(version: 2022_05_12_122232) do
        JOIN categories ON ((categories.id = data_resource_categories_attractions_join.category_id)))
        JOIN data_resource_categories ON ((attractions.id = data_resource_categories.data_resource_id)))
     WHERE (((attractions.type)::text = 'PointOfInterest'::text) AND (data_resource_categories.category_id = 15) AND ((data_resource_categories.data_resource_type)::text = 'PointOfInterest'::text) AND ((tags.name)::text = 'E-Bike-Vermietung'::text));
+  SQL
+  create_view "poi_coords_rideshare_points", sql_definition: <<-SQL
+      SELECT geo_locations.coords,
+      attractions.external_id AS id,
+      attractions.id AS datahub_id,
+      attractions.name,
+      categories.svg_icon
+     FROM (((((attractions
+       JOIN addresses ON (((addresses.addressable_id = attractions.id) AND ((addresses.addressable_type)::text = 'Attraction'::text))))
+       JOIN geo_locations ON (((geo_locations.geo_locateable_id = addresses.id) AND ((geo_locations.geo_locateable_type)::text = 'Address'::text))))
+       JOIN data_resource_categories data_resource_categories_attractions_join ON (((data_resource_categories_attractions_join.data_resource_id = attractions.id) AND ((data_resource_categories_attractions_join.data_resource_type)::text = 'PointOfInterest'::text))))
+       JOIN categories ON ((categories.id = data_resource_categories_attractions_join.category_id)))
+       JOIN data_resource_categories ON ((attractions.id = data_resource_categories.data_resource_id)))
+    WHERE (((attractions.type)::text = 'PointOfInterest'::text) AND ((data_resource_categories.category_id = 101) OR (data_resource_categories.category_id = 102) OR (data_resource_categories.category_id = 103) OR (data_resource_categories.category_id = 104)) AND ((data_resource_categories.data_resource_type)::text = 'PointOfInterest'::text));
   SQL
 end
