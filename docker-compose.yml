@@ -7,7 +7,7 @@ services:
       DATABASE_URL: postgres://bbnavihub@bbnavi-datahub-postgresql/bbnavihub
     command: "martin --config /martin_config.yml"
     configs:
-      - source: martin-config-yml-2022-05-12
+      - source: martin-config-yml-2022-05-19
         target: /martin_config.yml
     networks:
       - bbnavi-datahub-postgresql
@@ -138,7 +138,7 @@ configs:
     external: true
   datahub-nginx-conf:
     external: true
-  martin-config-yml-2022-05-12:
+  martin-config-yml-2022-05-19:
     external: true
 
 networks:
