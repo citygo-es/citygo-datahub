@@ -7,7 +7,7 @@ class Oauth::CustomTokensController < Doorkeeper::TokensController
   def cors_preflight_check
     if request.method == :options
       puts "headers set for preflight"
-      headers["Access-Control-Allow-Origin"] = "https://staging.bbnavi.de"
+      headers["Access-Control-Allow-Origin"] = "*"
       headers["Access-Control-Allow-Methods"] = "POST, PUT, GET, OPTIONS"
       headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization"
       headers["Access-Control-Max-Age"] = "1728000"
@@ -17,7 +17,7 @@ class Oauth::CustomTokensController < Doorkeeper::TokensController
 
   def set_headers
     puts "headers set"
-    headers["Access-Control-Allow-Origin"] = "https://staging.bbnavi.de"
+    headers["Access-Control-Allow-Origin"] = "*"
     headers["Access-Control-Allow-Methods"] = "GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD"
     headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     # headers['Access-Control-Allow-Headers'] = "*,X-Requested-With,Content-Type,If-Modified-Since,If-None-Match"
