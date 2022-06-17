@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_19_114405) do
+ActiveRecord::Schema.define(version: 2022_06_17_071009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2022_05_19_114405) do
     t.bigint "addressable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type"
   end
 
   create_table "app_user_contents", force: :cascade do |t|
@@ -76,6 +77,10 @@ ActiveRecord::Schema.define(version: 2022_05_19_114405) do
     t.string "type", default: "PointOfInterest", null: false
     t.integer "data_provider_id"
     t.boolean "visible", default: true
+    t.index ["data_provider_id"], name: "index_attractions_on_data_provider_id"
+    t.index ["external_id"], name: "index_attractions_on_external_id"
+    t.index ["name"], name: "index_attractions_on_name"
+    t.index ["type"], name: "index_attractions_on_type"
   end
 
   create_table "attractions_certificates", force: :cascade do |t|
@@ -143,6 +148,8 @@ ActiveRecord::Schema.define(version: 2022_05_19_114405) do
     t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_data_resource_categories_on_category_id"
+    t.index ["data_resource_id", "data_resource_type"], name: "index_drc_on_dr_id_and_dr_type"
   end
 
   create_table "data_resource_settings", force: :cascade do |t|
@@ -229,6 +236,9 @@ ActiveRecord::Schema.define(version: 2022_05_19_114405) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.geometry "coords", limit: {:srid=>0, :type=>"geometry"}
+    t.index ["coords"], name: "index_geo_locations_on_coords"
+    t.index ["geo_locateable_id", "geo_locateable_type"], name: "index_geo_locations_on_locable_id_and_locaable_type"
+    t.index ["latitude", "longitude"], name: "index_geo_locations_on_latitude_and_longitude"
   end
 
   create_table "locations", force: :cascade do |t|
