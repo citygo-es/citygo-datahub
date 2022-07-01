@@ -101,6 +101,7 @@ class AccountsController < ApplicationController
         :role_survey,
         :role_encounter_support,
         :role_static_contents,
+        :role_point_of_interest_rideshare,
         logo_attributes: %i[
           id
           url
