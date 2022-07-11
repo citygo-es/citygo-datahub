@@ -134,6 +134,7 @@ class AccountsController < ApplicationController
           :post_to_facebook,
           :facebook_page_id,
           :facebook_page_access_token,
+          :resource_admin,
           default_category_ids: []
         ]
       ]
