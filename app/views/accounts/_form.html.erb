@@ -92,7 +92,7 @@
       <%= l.label :url, "Link zum Logo" %>
       <%= l.text_field :url, class: "form-control", required: true %>
       <small class="form-text text-muted">
-        Diese Grafik wird über Ihren Beiträgen dargestellt.
+        Diese Grafik wird über Ihren Beiträgen dargestellt bsp.: https://smart-village.solutions/wp-content/uploads/2020/09/Logo-Smart-Village-Solutions-SVS.png.
       </small>
     </div>
 
@@ -253,6 +253,27 @@
             </small>
           </div>
         </div>
+
+        <% if @user.resource_admin_role? %>
+
+          <div class="row">
+            <div class="col-5 align-items-center justify-content-start"><hr></div>
+            <div class="col-2 align-items-center justify-content-center"><center>Rechte in der API</center></div>
+            <div class="col-5 align-items-center justify-content-end"><hr></div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-6">
+              <div class="form-check">
+                <%= s.check_box :resource_admin, { class: "form-check-input"}, "true", "false" %>
+                <%= s.label :resource_admin, "Resource Admin für diesen Datentyp", class: "form-check-label" %>
+                <small class="form-text text-muted">
+                  Wenn der Dataprovider die Rolle 'Resource Admin' hat, kann er alle Einträge dieses Typs bearbeiten.
+                </small>
+              </div>
+            </div>
+          </div>
+        <% end %>
 
         <div class="row">
           <div class="col-5 align-items-center justify-content-start"><hr></div>
