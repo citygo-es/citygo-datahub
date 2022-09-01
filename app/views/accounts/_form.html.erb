@@ -342,6 +342,13 @@
       </div>
 
       <div class="form-group">
+        <%= d.label :role_point_of_interest_category_ids, "Verfügbare Kategorien in Orte" %>
+        <div class="category-tree">
+          <%= render_selectable_categories(Category.all.arrange, d, :role_resource, :role_point_of_interest_category_ids) %>
+        </div>
+      </div>
+
+      <div class="form-group">
         <div class="form-check">
           <%= d.check_box :role_news_item, { class: "form-check-input" }, "true", "false" %>
           <%= d.label :role_news_item, "Nachrichten", class: "form-check-label" %>
@@ -417,13 +424,6 @@
         <div class="form-check">
           <%= d.check_box :role_encounter_support, { class: "form-check-input" }, "true", "false" %>
           <%= d.label :role_encounter_support, "Support für Begegnungen", class: "form-check-label" %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="form-check">
-          <%= d.check_box :role_point_of_interest_rideshare, { class: "form-check-input" }, "true", "false" %>
-          <%= d.label :role_point_of_interest_rideshare, "Mitfahrpunkte", class: "form-check-label" %>
         </div>
       </div>
     </div>

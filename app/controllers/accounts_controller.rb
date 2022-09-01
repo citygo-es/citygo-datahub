@@ -59,6 +59,7 @@ class AccountsController < ApplicationController
   def update
     @user = User.find(params["id"])
     @user.update_attributes(account_params)
+
     flash[:notice] = "Nutzer aktualisiert"
     respond_to do |format|
       format.html { redirect_to action: :edit }
@@ -101,7 +102,6 @@ class AccountsController < ApplicationController
         :role_survey,
         :role_encounter_support,
         :role_static_contents,
-        :role_point_of_interest_rideshare,
         logo_attributes: %i[
           id
           url
@@ -136,7 +136,8 @@ class AccountsController < ApplicationController
           :facebook_page_access_token,
           :resource_admin,
           default_category_ids: []
-        ]
+        ],
+        role_point_of_interest_category_ids: []
       ]
     )
     values.delete_if { |_key, value| value.blank? }

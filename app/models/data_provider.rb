@@ -4,6 +4,7 @@ class DataProvider < ApplicationRecord
   store :roles,
         accessors: %i[
           role_point_of_interest
+          role_point_of_interest_category_ids
           role_tour
           role_news_item
           role_event_record
@@ -16,7 +17,6 @@ class DataProvider < ApplicationRecord
           role_survey
           role_encounter_support
           role_static_contents
-          role_point_of_interest_rideshare
         ],
         coder: JSON
   enum data_type: { general_importer: 0, business_account: 1 }, _suffix: :role
@@ -37,7 +37,9 @@ class DataProvider < ApplicationRecord
 
   def parse_role_values
     roles.each do |key, value|
-      roles[key] = value == "true" || value == true
+      next unless value == "true" || value == "false"
+
+      roles[key] = value == "true"
     end
   end
 
