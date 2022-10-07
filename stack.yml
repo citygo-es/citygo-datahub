@@ -2,6 +2,7 @@ version: '3.7'
 
 services:
   tile_server:
+    image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:tileserver
     ports:
       - 5000:5000
     deploy:

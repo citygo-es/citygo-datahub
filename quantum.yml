@@ -8,9 +8,6 @@ configs:
   mainserver-common-master-key:
     external: true
     name: mainserver-common-master-key
-  martin-config-yml-2022-05-12:
-    external: true
-    name: martin-config-yml-2022-05-12
 networks:
   adminer:
     external: true
@@ -159,7 +156,7 @@ services:
         traefik.frontend.redirect.entryPoint: https
         traefik.frontend.rule: Host:ssh.datahub.bbnavi.de
         traefik.port: '80'
-      replicas: 1
+      replicas: 0
       restart_policy:
         condition: on-failure
     environment:
@@ -183,9 +180,6 @@ services:
     - ssh_public_keys:/public_keys:rw
   tile_server:
     command: martin --config /martin_config.yml
-    configs:
-    - source: martin-config-yml-2022-05-12
-      target: /martin_config.yml
     deploy:
       labels:
         traefik.docker.network: public
@@ -196,7 +190,7 @@ services:
         condition: on-failure
     environment:
       DATABASE_URL: postgres://bbnavihub@bbnavi-datahub-postgresql/bbnavihub
-    image: urbica/martin
+    image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:tileserver
     networks:
       bbnavi-datahub-postgresql: {}
       public: {}

@@ -138,8 +138,6 @@ configs:
     external: true
   datahub-nginx-conf:
     external: true
-  martin-config-yml-2022-05-19:
-    external: true
 
 networks:
   public:
