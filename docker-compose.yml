@@ -2,13 +2,13 @@ version: '3.7'
 
 services:
   tile_server:
-    image: urbica/martin
+    image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:tileserver
     environment:
       DATABASE_URL: postgres://bbnavihub@bbnavi-datahub-postgresql/bbnavihub
     command: "martin --config /martin_config.yml"
-    configs:
-      - source: martin-config-yml-2022-05-19
-        target: /martin_config.yml
+    # configs:
+    #   - source: martin-config-yml-2022-05-19
+    #     target: /martin_config.yml
     networks:
       - bbnavi-datahub-postgresql
       - public
