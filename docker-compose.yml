@@ -46,6 +46,9 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+      placement:
+        constraints:
+        - node.hostname == node-001.tpwd-bb-navi
 
   cron_job:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
@@ -68,6 +71,9 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+      placement:
+        constraints:
+        - node.hostname == node-001.tpwd-bb-navi
 
   app:
     image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
@@ -89,6 +95,9 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+      placement:
+        constraints:
+        - node.hostname == node-001.tpwd-bb-navi
 
   nginx:
     image: nginx
@@ -102,6 +111,9 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+      placement:
+        constraints:
+        - node.hostname == node-001.tpwd-bb-navi
 
   db:
     # image: 'postgres:10.3-alpine'
@@ -120,6 +132,9 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+      placement:
+        constraints:
+        - node.hostname == node-001.tpwd-bb-navi
 
 volumes:
   datahub_db:
