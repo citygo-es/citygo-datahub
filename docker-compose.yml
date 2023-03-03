@@ -121,14 +121,17 @@ services:
     environment:
       POSTGRES_USER: bbnavihub
       POSTGRES_PASSWORT: bbnavihub
+      POSTGRES_PASSWORD: bbnavihub
       POSTGRES_DB: bbnavihub
+      POSTGRES_HOST_AUTH_METHOD: trust
       DATADIR: /var/lib/postgresql/data
     networks:
       bbnavi-datahub-postgresql:
         aliases:
           - bbnavi-datahub-postgresql
     volumes:
-      - datahub_db:/var/lib/postgresql/data
+      - datahub_postgres_production_db:/var/lib/postgresql/data:rw
+      # old db backup in volume 'datahub_db'
     deploy:
       restart_policy:
         condition: on-failure
@@ -137,7 +140,7 @@ services:
         - node.hostname == node-001.tpwd-bb-navi
 
 volumes:
-  datahub_db:
+  datahub_postgres_production_db:
     external: true
   redis_data:
     external: true
