@@ -117,7 +117,7 @@ services:
 
   db:
     # image: 'postgres:10.3-alpine'
-    image: 'postgis/postgis:10-3.1'
+    image: 'postgis/postgis:15-3.3'
     environment:
       POSTGRES_USER: bbnavihub
       POSTGRES_PASSWORT: bbnavihub
@@ -130,7 +130,7 @@ services:
         aliases:
           - bbnavi-datahub-postgresql
     volumes:
-      - datahub_postgres_production_db:/var/lib/postgresql/data:rw
+      - datahub_postgres_15_production_db:/var/lib/postgresql/data:rw
       # old db backup in volume 'datahub_db'
     deploy:
       restart_policy:
@@ -140,7 +140,7 @@ services:
         - node.hostname == node-001.tpwd-bb-navi
 
 volumes:
-  datahub_postgres_production_db:
+  datahub_postgres_15_production_db:
     external: true
   redis_data:
     external: true

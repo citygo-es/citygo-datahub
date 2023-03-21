@@ -91,9 +91,11 @@ services:
     environment:
       DATADIR: /var/lib/postgresql/data
       POSTGRES_DB: bbnavihub
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_PASSWORD: bbnavihub
       POSTGRES_PASSWORT: bbnavihub
       POSTGRES_USER: bbnavihub
-    image: postgis/postgis:10-3.1
+    image: postgis/postgis:15-3.3
     networks:
       adminer:
         aliases:
@@ -103,7 +105,7 @@ services:
         - bbnavi-datahub-postgresql
       default: {}
     volumes:
-    - datahub_db:/var/lib/postgresql/data:rw
+    - datahub_postgres_15_production_db:/var/lib/postgresql/data:rw
   delayed_job:
     command: bin/delayed_job run
     configs:
@@ -218,9 +220,9 @@ services:
 version: '3.7'
 volumes:
   assets: {}
-  datahub_db:
+  datahub_postgres_15_production_db:
     external: true
-    name: datahub_db
+    name: datahub_postgres_15_production_db
   redis_data:
     external: true
     name: redis_data
