@@ -5,6 +5,9 @@ postgres:
   # Database connection string
   connection_string: 'postgres://bbnavihub@bbnavi-datahub-postgresql/bbnavihub'
 
+  # disable automatic discovery of tables and functions
+  auto_publish: false
+
   # Associative arrays of table sources
   table_sources:
     public.poi_coords:
