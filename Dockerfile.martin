@@ -5,4 +5,4 @@ COPY docker/martin_config.yml /config/config.yml
 RUN apk add --no-cache curl
 HEALTHCHECK \
   --interval=5s --timeout=3s --retries=3 --start-period=3s \
-  CMD curl -fsSLI "http://localhost:3000/health"
+  CMD curl -fsSLI "http://localhost:3000/health" || exit 1
