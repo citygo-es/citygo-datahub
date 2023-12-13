@@ -26,7 +26,7 @@ services:
      - redis_data:/bitnami/redis/data:rw
 
   delayed_job:
-    image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
+    image: ghcr.io/citygo-es/citygo-datahub:master
     command: bin/delayed_job run
     networks:
       - bbnavi-datahub-postgresql
@@ -51,7 +51,7 @@ services:
         - node.hostname == node-001.tpwd-bb-navi
 
   cron_job:
-    image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
+    image: ghcr.io/citygo-es/citygo-datahub:master
     command: bin/start-cron.sh
     environment:
       SVA_COMMUNITY: bbnavi
@@ -76,7 +76,7 @@ services:
         - node.hostname == node-001.tpwd-bb-navi
 
   app:
-    image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub:latest
+    image: ghcr.io/citygo-es/citygo-datahub:master
     environment:
       SVA_COMMUNITY: bbnavi
       RAILS_ENV: production
