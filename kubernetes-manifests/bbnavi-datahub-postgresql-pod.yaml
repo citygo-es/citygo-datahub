@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../docker-compose.yml
+    kompose.version: 1.31.2 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.network/bbnavi-datahub-postgresql: "true"
+    io.kompose.service: bbnavi-datahub-postgresql
+  name: bbnavi-datahub-postgresql
+spec:
+  containers:
+    - env:
+        - name: DATADIR
+          value: /var/lib/postgresql/data
+        - name: POSTGRES_DB
+          value: bbnavihub
+        - name: POSTGRES_HOST_AUTH_METHOD
+          value: trust
+        - name: POSTGRES_PASSWORD
+          value: bbnavihub
+        - name: POSTGRES_PASSWORT
+          value: bbnavihub
+        - name: POSTGRES_USER
+          value: bbnavihub
+      image: postgis/postgis:15-3.3
+      name: bbnavi-datahub-postgresql
+      ports:
+        - containerPort: 5432
+          protocol: TCP
+      resources: {}
+      volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: datahub-postgres-15-production-db
+  restartPolicy: OnFailure
+  volumes:
+    - name: datahub-postgres-15-production-db
+      persistentVolumeClaim:
+        claimName: datahub-postgres-15-production-db
+status: {}

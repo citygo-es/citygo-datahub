@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../docker-compose.yml
+    kompose.version: 1.31.2 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.network/citygo-datahub-1-default: "true"
+    io.kompose.network/public: "true"
+    io.kompose.service: nginx
+  name: nginx
+spec:
+  containers:
+    - image: nginx
+      name: nginx
+      ports:
+        - containerPort: 80
+          protocol: TCP
+      resources: {}
+      volumeMounts:
+        - mountPath: /unicorn
+          name: unicorn
+        - mountPath: /public
+          name: assets
+  restartPolicy: OnFailure
+  volumes:
+    - name: unicorn
+      persistentVolumeClaim:
+        claimName: unicorn
+    - name: assets
+      persistentVolumeClaim:
+        claimName: assets
+status: {}

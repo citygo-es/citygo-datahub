@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../docker-compose.yml
+    kompose.service.expose: datahub.citygo.es
+    kompose.service.expose.ingress-class-name: traefik
+    kompose.service.expose.tls-secret: tls-datahub
+    kompose.version: 1.31.2 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.network/bbnavi-datahub-postgresql: "true"
+    io.kompose.network/bbnavi-redis-server: "true"
+    io.kompose.service: app
+  name: app
+spec:
+  volumes: 
+    - name: master-key
+      secret: 
+        secret-name: datahub-master-key
+  containers:
+    - env:
+        - name: RAILS_ENV
+          value: production
+        - name: RAILS_LOG_TO_STDOUT
+          value: "1"
+        - name: SVA_COMMUNITY
+          value: bbnavi
+        - name: RAILS_MASTER_KEY
+          valueFrom: 
+            secretKeyRef: 
+              name: datahub-master-key
+              key: master.key
+      image: ghcr.io/citygo-es/citygo-datahub:master
+      name: app
+      ports:
+        - containerPort: 3000
+          protocol: TCP
+      resources: {}
+      volumeMounts:
+        - mountPath: /unicorn
+          name: unicorn
+        - mountPath: /assets
+          name: assets
+  restartPolicy: OnFailure
+  volumes:
+    - name: unicorn
+      persistentVolumeClaim:
+        claimName: unicorn
+    - name: assets
+      persistentVolumeClaim:
+        claimName: assets
+status: {}

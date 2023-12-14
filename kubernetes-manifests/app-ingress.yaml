@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../docker-compose.yml
+    kompose.service.expose: datahub.citygo.es
+    kompose.service.expose.ingress-class-name: traefik
+    kompose.service.expose.tls-secret: tls-datahub
+    kompose.version: 1.31.2 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: datahub.citygo.es
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  number: 3000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - datahub.citygo.es
+      secretName: tls-datahub
+status:
+  loadBalancer: {}
