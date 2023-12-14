@@ -9,6 +9,7 @@ RUN apt-get update \
   && apt-get install -y yarn \
   && apt-get install -y wget \
   && apt-get install -y libpq-dev \
+  && apt-get install nano vim && \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /usr/src/*
 
